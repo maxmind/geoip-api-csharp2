@@ -1,0 +1,29 @@
+GeoIP C# API 1.0
+================
+
+Instructions for Mono - see http://www.mono-project.com/
+Should also work in Windows C# environment.
+
+To compile the examples
+For country example
+mono /usr/local/bin/mcs.exe countryExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs 
+
+For city example
+mono /usr/local/bin/mcs.exe cityExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs
+
+for region example
+mono /usr/local/bin/mcs.exe regionExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs
+
+to run the examples
+
+for country example
+mono countryExample.exe
+
+for city example
+mono cityExample.exe
+
+for org example
+mono orgExample.exe
+
+Copyright 2004 MaxMind LLC
+Licensed under the GPL
