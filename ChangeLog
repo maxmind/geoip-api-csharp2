@@ -1,2 +1,5 @@
+1.1	October 6th, 2004
+	Added swapbytes function, fixed lookup issues (Frank Mather)
+
 1.0	July 23rd, 2004
 	Initial Release

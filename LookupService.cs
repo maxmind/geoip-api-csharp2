@@ -135,6 +135,8 @@ public class LookupService{
        int i, j;
        byte [] delim = new byte[3];
        byte [] buf = new byte[SEGMENT_RECORD_LENGTH];
+       databaseType = (byte)DatabaseInfo.COUNTRY_EDITION;
+       recordLength = STANDARD_RECORD_LENGTH;
        //file.Seek(file.Length() - 3,SeekOrigin.Begin);
        file.Seek(-3,SeekOrigin.End);
         for (i = 0; i < STRUCTURE_INFO_MAX_SIZE; i++) {
@@ -196,7 +198,7 @@ public class LookupService{
     }
     public Country getCountry(IPAddress ipAddress) {
         //return getCountry(bytesToLong(ipAddress.Address));
-        return getCountry(ipAddress.Address);
+        return getCountry(swapbytes(ipAddress.Address));
     }
     public Country getCountry(String ipAddress){
            IPAddress addr;
@@ -209,7 +211,7 @@ public class LookupService{
                 return UNKNOWN_COUNTRY;
             }
           //  return getCountry(bytesToLong(addr.Address));
-            return getCountry(addr.Address);
+            return getCountry(swapbytes(addr.Address));
     }
     public Country getCountry(long ipAddress){
         if (file == null) {
@@ -280,7 +282,7 @@ public class LookupService{
     }
    public Region getRegion(IPAddress ipAddress) {
         //return getCountry(bytesToLong(ipAddress.Address));
-        return getRegion(ipAddress.Address);
+        return getRegion(swapbytes(ipAddress.Address));
     }
     public Region getRegion(String str){
             IPAddress addr;
@@ -292,7 +294,7 @@ public class LookupService{
 		return null;
             }
 
-            return getRegion(addr.Address);
+            return getRegion(swapbytes(addr.Address));
     }
     public Region getRegion(long ipnum){
             Region record = new Region();
@@ -340,7 +342,7 @@ public class LookupService{
     }
     public Location getLocation(IPAddress addr){
            //return getLocation(bytesToLong(addr.Address));
-           return getLocation(addr.Address);
+           return getLocation(swapbytes(addr.Address));
     }
     public Location getLocation(String str){
             IPAddress addr;
@@ -352,7 +354,7 @@ public class LookupService{
 		return null;
             }
 
-            return getLocation(addr.Address);
+            return getLocation(swapbytes(addr.Address));
     }
     public Location getLocation(long ipnum){
         int record_pointer;
@@ -437,7 +439,7 @@ public class LookupService{
         return record;
     }
     public String getOrg(IPAddress addr) {
-        return getOrg(addr.Address);
+        return getOrg(swapbytes(addr.Address));
     }
     public String getOrg(String str){
             IPAddress addr;
@@ -449,7 +451,7 @@ public class LookupService{
 	    Console.Write(e.Message);
 	    return null;
             }
-            return getOrg(addr.Address);
+            return getOrg(swapbytes(addr.Address));
     }
     public String getOrg(long ipnum){
             int Seek_org;
@@ -485,8 +487,8 @@ public class LookupService{
             byte [] buf = new byte[2 * MAX_RECORD_LENGTH];
             int [] x = new int[2];
         int offset = 0;
-        for (int depth = 31; depth >= 0; depth--) {
-            try {
+	for (int depth = 31; depth >= 0; depth--) {
+	    try {
                 file.Seek(2 * recordLength * offset,SeekOrigin.Begin);
                 file.Read(buf,0,2 * MAX_RECORD_LENGTH);
             }
@@ -496,7 +498,7 @@ public class LookupService{
             for (int i = 0; i<2; i++) {
                 x[i] = 0;
                 for (int j = 0; j<recordLength; j++) {
-                    int y = buf[i*recordLength+j];
+                    int y = buf[(i*recordLength)+j];
                     if (y < 0) {
                         y+= 256;
                     }
@@ -506,7 +508,7 @@ public class LookupService{
 
             if ((ipAddress & (1 << depth)) > 0) {
                 if (x[1] >= databaseSegments[0]) {
-                    return x[1];
+		    return x[1];
                 }
                 offset = x[1];
             }
@@ -517,12 +519,15 @@ public class LookupService{
                 offset = x[0];
             }
         }
-        
+
         // shouldn't reach here
-        //System.err.println("Error Seeking country while Seeking " + ipAddress);
         Console.Write("Error Seeking country while Seeking " + ipAddress);
 	return 0;
 
+    }
+    private static long swapbytes(long ipAddress){
+      return (((ipAddress>>0) & 255) << 24) | (((ipAddress>>8) & 255) << 16)
+	| (((ipAddress>>16) & 255) << 8) | (((ipAddress>>24) & 255) << 0);
     }
     private static long bytestoLong(byte [] address){
             long ipnum = 0;
