@@ -28,6 +28,8 @@ public class LookupService{
     byte databaseType = Convert.ToByte(DatabaseInfo.COUNTRY_EDITION);
     int[] databaseSegments;
     int recordLength;
+    int dboptions;
+    byte[] dbbuffer;
 
     String licenseKey;
     int dnsService = 0;
@@ -48,6 +50,8 @@ public class LookupService{
     private static int US_OFFSET = 1;
     private static int CANADA_OFFSET = 677;
     private static int WORLD_OFFSET = 1353;
+    private static int GEOIP_STANDARD = 0;
+    private static int GEOIP_MEMORY_CACHE = 1;
 
     private static String[] countryCode = {
         "--","AP","EU","AD","AE","AF","AG","AI","AL","AM","AN","AO","AQ","AR",
@@ -121,16 +125,19 @@ public class LookupService{
             "South Africa","Zambia","Zaire","Zimbabwe","Anonymous Proxy",
             "Satellite Provider","Other"};
 
-
-
-    public LookupService(String databaseFile){
+    public LookupService(String databaseFile, int options){
         try {
-           this.file = new FileStream(databaseFile, FileMode.Open, FileAccess.Read);
+	   this.file = new FileStream(databaseFile, FileMode.Open, FileAccess.Read);
+	   dboptions = options;
            init();
-        }catch(System.SystemException e){
+        } catch(System.SystemException e) {
            Console.Write("cannot open file " + databaseFile + "\n");
         }
     }
+
+    public LookupService(String databaseFile):this(databaseFile, GEOIP_STANDARD){
+    }
+
     private void init(){
        int i, j;
        byte [] delim = new byte[3];
@@ -187,6 +194,12 @@ public class LookupService{
             databaseSegments = new int[1];
             databaseSegments[0] = COUNTRY_BEGIN;
             recordLength = STANDARD_RECORD_LENGTH;
+        }
+        if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
+            int l = (int) file.Length;
+            dbbuffer = new byte[l];
+            file.Seek(0,SeekOrigin.Begin);
+            file.Read(dbbuffer,0,l);
         }
     }
     public void close(){
@@ -372,8 +385,14 @@ public class LookupService{
                 return null;
             }
             record_pointer = Seek_country + ((2 * recordLength - 1) * databaseSegments[0]);
-            file.Seek(record_pointer,SeekOrigin.Begin);
+            if ((dboptions & GEOIP_MEMORY_CACHE) == 1){
+	      for (int i = 0;i < FULL_RECORD_LENGTH;i++){
+		record_buf[i] = dbbuffer[i+record_pointer];
+	      }
+	    } else {
+	    file.Seek(record_pointer,SeekOrigin.Begin);
             file.Read(record_buf,0,FULL_RECORD_LENGTH);
+	    }
 	    for (int a0 = 0;a0 < FULL_RECORD_LENGTH;a0++){
                 record_buf2[a0] = Convert.ToChar(record_buf[a0]);
 	    }
@@ -468,9 +487,15 @@ public class LookupService{
             }
 
             record_pointer = Seek_org + (2 * recordLength - 1) * databaseSegments[0];
-            file.Seek(record_pointer,SeekOrigin.Begin);
-            file.Read(buf,0,MAX_ORG_RECORD_LENGTH);
-            while (buf[str_length] != 0) {
+            if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
+	      for (int i = 0;i < MAX_ORG_RECORD_LENGTH;i++) {
+		buf[i] = dbbuffer[i+record_pointer];
+	      }
+	    } else {
+	      file.Seek(record_pointer,SeekOrigin.Begin);
+              file.Read(buf,0,MAX_ORG_RECORD_LENGTH);
+            }
+	    while (buf[str_length] != 0) {
             buf2[str_length] = Convert.ToChar(buf[str_length]);
 	    str_length++;
             }
@@ -489,9 +514,15 @@ public class LookupService{
         int offset = 0;
 	for (int depth = 31; depth >= 0; depth--) {
 	    try {
-                file.Seek(2 * recordLength * offset,SeekOrigin.Begin);
-                file.Read(buf,0,2 * MAX_RECORD_LENGTH);
-            }
+		if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
+		    for (int i = 0;i < (2 * MAX_RECORD_LENGTH);i++) {
+			buf[i] = dbbuffer[i+(2 * recordLength * offset)];
+		    }
+		} else {
+		    file.Seek(2 * recordLength * offset,SeekOrigin.Begin);
+		    file.Read(buf,0,2 * MAX_RECORD_LENGTH);
+		}
+	    }
             catch (IOException e) {
                 Console.Write("IO Exception");
             }

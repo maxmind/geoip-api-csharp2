@@ -1,4 +1,4 @@
-**
+/**
  * Location.cs
  *
  * Copyright (C) 2004 MaxMind LLC.  All Rights Reserved.
