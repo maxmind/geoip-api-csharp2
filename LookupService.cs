@@ -50,8 +50,8 @@ public class LookupService{
     private static int US_OFFSET = 1;
     private static int CANADA_OFFSET = 677;
     private static int WORLD_OFFSET = 1353;
-    private static int GEOIP_STANDARD = 0;
-    private static int GEOIP_MEMORY_CACHE = 1;
+    public static int GEOIP_STANDARD = 0;
+    public static int GEOIP_MEMORY_CACHE = 1;
 
     private static String[] countryCode = {
         "--","AP","EU","AD","AE","AF","AG","AI","AL","AM","AN","AO","AQ","AR",

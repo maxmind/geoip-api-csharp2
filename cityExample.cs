@@ -4,7 +4,7 @@ using System.IO;
 class Appa0{
   public static void Main(String[] args){
     //open the database
-    LookupService ls = new LookupService("/usr/local/share/GeoIP/GeoIPCity.dat");
+    LookupService ls = new LookupService("/usr/local/share/GeoIP/GeoIPCity.dat", LookupService.GEOIP_STANDARD);
     //get city location of the ip address
     Location l = ls.getLocation("24.24.24.24");
     Console.Write("country code " + l.countryCode + "\n");

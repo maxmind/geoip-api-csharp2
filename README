@@ -25,5 +25,14 @@ mono cityExample.exe
 for org example
 mono orgExample.exe
 
+MEMORY CACHING
+
+There are two options available:
+
+GEOIP_STANDARD - read database from filesystem, uses least memory.
+
+GEOIP_MEMORY_CACHE - load database into memory, faster performance
+        but uses more memory
+
 Copyright 2004 MaxMind LLC
 Licensed under the GPL

@@ -9,7 +9,7 @@ using System.IO;
 class Appa0{
   public static void Main(String[] args){
     //open the database
-    LookupService ls = new LookupService("/usr/local/share/GeoIP/GeoIP.dat");
+    LookupService ls = new LookupService("/usr/local/share/GeoIP/GeoIP.dat", LookupService.GEOIP_MEMORY_CACHE);
     //get country of the ip address
     Country c = ls.getCountry("24.24.24.24");  
     Console.Write(" code: " + c.getCode()+"\n");    
