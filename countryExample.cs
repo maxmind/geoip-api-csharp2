@@ -1,4 +1,9 @@
 // an example of how to lookup the country of a ip address
+
+// This only works with the GeoIP Country database
+// See regionExample.cs, cityExample.cs, and orgExample.cs
+// for the Region database, city database, and ISP/Organization databases
+
 using System;
 using System.IO;
 class Appa0{
