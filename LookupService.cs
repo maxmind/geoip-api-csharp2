@@ -1,7 +1,7 @@
 /**
  * LookupService.cs
  *
- * Copyright (C) 2004 MaxMind LLC.  All Rights Reserved.
+ * Copyright (C) 2006 MaxMind LLC.  All Rights Reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -52,6 +52,10 @@ public class LookupService{
     private static int WORLD_OFFSET = 1353;
     public static int GEOIP_STANDARD = 0;
     public static int GEOIP_MEMORY_CACHE = 1;
+    public static int GEOIP_UNKNOWN_SPEED = 0;
+    public static int GEOIP_DIALUP_SPEED = 1;
+    public static int GEOIP_CABLEDSL_SPEED = 2;
+    public static int GEOIP_CORPORATE_SPEED = 3;
 
     private static String[] countryCode = {
         "--","AP","EU","AD","AE","AF","AG","AI","AL","AM","AN","AO","AQ","AR",
@@ -166,7 +170,8 @@ public class LookupService{
                 } else if (databaseType == DatabaseInfo.CITY_EDITION_REV0 ||
                         databaseType == DatabaseInfo.CITY_EDITION_REV1 ||
                         databaseType == DatabaseInfo.ORG_EDITION ||
-                        databaseType == DatabaseInfo.ISP_EDITION)
+                        databaseType == DatabaseInfo.ISP_EDITION ||
+                        databaseType == DatabaseInfo.ASNUM_EDITION)
                 {
                     databaseSegments = new int[1];
                     databaseSegments[0] = 0;
@@ -190,7 +195,9 @@ public class LookupService{
 	        //file.Seek(file.position-4,SeekOrigin.Begin);
 	    }
         }
-        if (databaseType == DatabaseInfo.COUNTRY_EDITION) {
+        if ((databaseType == DatabaseInfo.COUNTRY_EDITION) | 
+            (databaseType == DatabaseInfo.PROXY_EDITION) |
+            (databaseType == DatabaseInfo.NETSPEED_EDITION)) {
             databaseSegments = new int[1];
             databaseSegments[0] = COUNTRY_BEGIN;
             recordLength = STANDARD_RECORD_LENGTH;
@@ -239,6 +246,31 @@ public class LookupService{
             return new Country(countryCode[ret], countryName[ret]);
         }
 
+    }
+
+    public int getID(String ipAddress){
+           IPAddress addr;
+            try {
+                addr = IPAddress.Parse(ipAddress);
+            }
+            catch (Exception e) {
+                Console.Write(e.Message);
+                return 0;
+            }
+            return getID(swapbytes(addr.Address));
+    }
+
+    public int getID(IPAddress ipAddress) {
+        
+        return getID(swapbytes(ipAddress.Address));
+    }
+
+    public int getID(long ipAddress){
+      if (file == null) {
+           throw new Exception("Database has been closed.");
+      }
+      int ret = SeekCountry(ipAddress) - databaseSegments[0];
+      return ret;
     }
     public DatabaseInfo getDatabaseInfo(){
         if (databaseInfo != null) {
