@@ -217,8 +217,7 @@ public class LookupService{
         catch (Exception e) { }
     }
     public Country getCountry(IPAddress ipAddress) {
-        //return getCountry(bytesToLong(ipAddress.Address));
-        return getCountry(swapbytes(ipAddress.Address));
+        return getCountry(bytestoLong(ipAddress.GetAddressBytes()));
     }
     public Country getCountry(String ipAddress){
            IPAddress addr;
@@ -230,8 +229,8 @@ public class LookupService{
                 Console.Write(e.Message);
                 return UNKNOWN_COUNTRY;
             }
-          //  return getCountry(bytesToLong(addr.Address));
-            return getCountry(swapbytes(addr.Address));
+          //  return getCountry(bytestoLong(addr.GetAddressBytes()));
+            return getCountry(bytestoLong(addr.GetAddressBytes()));
     }
     public Country getCountry(long ipAddress){
         if (file == null) {
@@ -257,12 +256,12 @@ public class LookupService{
                 Console.Write(e.Message);
                 return 0;
             }
-            return getID(swapbytes(addr.Address));
+            return getID(bytestoLong(addr.GetAddressBytes()));
     }
 
     public int getID(IPAddress ipAddress) {
         
-        return getID(swapbytes(ipAddress.Address));
+        return getID(bytestoLong(ipAddress.GetAddressBytes()));
     }
 
     public int getID(long ipAddress){
@@ -326,8 +325,7 @@ public class LookupService{
         return new DatabaseInfo("");
     }
    public Region getRegion(IPAddress ipAddress) {
-        //return getCountry(bytesToLong(ipAddress.Address));
-        return getRegion(swapbytes(ipAddress.Address));
+        return getRegion(bytestoLong(ipAddress.GetAddressBytes()));
     }
     public Region getRegion(String str){
             IPAddress addr;
@@ -339,7 +337,7 @@ public class LookupService{
 		return null;
             }
 
-            return getRegion(swapbytes(addr.Address));
+            return getRegion(bytestoLong(addr.GetAddressBytes()));
     }
     public Region getRegion(long ipnum){
             Region record = new Region();
@@ -386,8 +384,7 @@ public class LookupService{
            return record;
     }
     public Location getLocation(IPAddress addr){
-           //return getLocation(bytesToLong(addr.Address));
-           return getLocation(swapbytes(addr.Address));
+           return getLocation(bytestoLong(addr.GetAddressBytes()));
     }
     public Location getLocation(String str){
             IPAddress addr;
@@ -399,7 +396,7 @@ public class LookupService{
 		return null;
             }
 
-            return getLocation(swapbytes(addr.Address));
+            return getLocation(bytestoLong(addr.GetAddressBytes()));
     }
     public Location getLocation(long ipnum){
         int record_pointer;
@@ -490,7 +487,7 @@ public class LookupService{
         return record;
     }
     public String getOrg(IPAddress addr) {
-        return getOrg(swapbytes(addr.Address));
+        return getOrg(bytestoLong(addr.GetAddressBytes()));
     }
     public String getOrg(String str){
             IPAddress addr;
@@ -502,7 +499,7 @@ public class LookupService{
 	    Console.Write(e.Message);
 	    return null;
             }
-            return getOrg(swapbytes(addr.Address));
+            return getOrg(bytestoLong(addr.GetAddressBytes()));
     }
     public String getOrg(long ipnum){
             int Seek_org;
