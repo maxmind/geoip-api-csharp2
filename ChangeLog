@@ -1,3 +1,5 @@
+	- getCountry method works with GeoIP City as well as GeoIP Country (Frank Mather)
+	
 1.6	February 20th, 2007
 	- Added AX/Aland Islands, GG/Guernsey, IM/Isle of Man, JE/Jersey (ISO-3166-1 changes)
 	- Replaced CS/Serbia and Montenegro with RS/Serbia, removed ZR/Zaire, added ME/Montenegro

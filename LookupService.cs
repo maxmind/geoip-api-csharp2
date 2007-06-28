@@ -238,14 +238,50 @@ public class LookupService{
             //throw new IllegalStateException("Database has been closed.");
             throw new Exception("Database has been closed.");
         }
-        int ret = SeekCountry(ipAddress) - COUNTRY_BEGIN;
-        if (ret == 0) {
-            return UNKNOWN_COUNTRY;
-        }
+        if ((databaseType == DatabaseInfo.CITY_EDITION_REV1) | 
+        (databaseType == DatabaseInfo.CITY_EDITION_REV0)) {
+            Location l = getLocation(ipAddress);
+            if (l == null) {
+                return UNKNOWN_COUNTRY;
+            } 
+            else {
+                return new Country(l.countryCode, l.countryName);
+            }
+        } 
         else {
-            return new Country(countryCode[ret], countryName[ret]);
+            int ret = SeekCountry(ipAddress) - COUNTRY_BEGIN;
+            if (ret == 0) {
+                return UNKNOWN_COUNTRY;
+            }
+            else {
+                return new Country(countryCode[ret], countryName[ret]);
+            }
         }
+    }
 
+    public int getID(String ipAddress){
+           IPAddress addr;
+            try {
+                addr = IPAddress.Parse(ipAddress);
+            }
+            catch (Exception e) {
+                Console.Write(e.Message);
+                return 0;
+            }
+            return getID(swapbytes(addr.Address));
+    }
+
+    public int getID(IPAddress ipAddress) {
+        
+        return getCountry(swapbytes(ipAddress.Address));
+    }
+
+    public int getID(long ipAddress){
+      if (file == null) {
+           throw new Exception("Database has been closed.");
+      }
+      int ret = seekCountry(ipAddress) - databaseSegments[0];
+      return ret;
     }
 
     public int getID(String ipAddress){
