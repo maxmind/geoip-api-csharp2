@@ -1,19 +1,19 @@
 /**
  * LookupService.cs
  *
- * Copyright (C) 2007 MaxMind LLC.  All Rights Reserved.
+ * Copyright (C) 2008 MaxMind Inc.  All Rights Reserved.
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU General Public
+ * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -75,7 +75,8 @@ public class LookupService{
         "SK","SL","SM","SN","SO","SR","ST","SV","SY","SZ","TC","TD","TF","TG",
         "TH","TJ","TK","TM","TN","TO","TL","TR","TT","TV","TW","TZ","UA","UG",
         "UM","US","UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","YE",
-        "YT","RS","ZA","ZM","ME","ZW","A1","A2","O1","AX","GG","IM","JE"};
+        "YT","RS","ZA","ZM","ME","ZW","A1","A2","O1","AX","GG","IM","JE","BL",
+	"MF"};
 
     private static String[] countryName = {
             "N/A","Asia/Pacific Region","Europe","Andorra","United Arab Emirates",
@@ -128,7 +129,8 @@ public class LookupService{
             "Vanuatu","Wallis and Futuna","Samoa","Yemen","Mayotte","Serbia",
             "South Africa","Zambia","Montenegro","Zimbabwe","Anonymous Proxy",
             "Satellite Provider","Other",
-	    "Aland Islands","Guernsey","Isle of Man","Jersey"};
+	    "Aland Islands","Guernsey","Isle of Man","Jersey","Saint Barthelemy",
+	    "Saint Martin"};
 
     public LookupService(String databaseFile, int options){
         try {
