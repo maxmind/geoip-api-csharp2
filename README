@@ -1,4 +1,4 @@
-GeoIP C# API 1.6
+GeoIP C# API 1.7
 ================
 
 Instructions for Mono - see http://www.mono-project.com/
@@ -34,5 +34,5 @@ GEOIP_STANDARD - read database from filesystem, uses least memory.
 GEOIP_MEMORY_CACHE - load database into memory, faster performance
         but uses more memory
 
-Copyright 2006 MaxMind LLC
-Licensed under the GPL
+Copyright 2008 MaxMind Inc
+Licensed under the LGPL

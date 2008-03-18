@@ -1,3 +1,6 @@
+1.7	March 18th, 2008
+	- Changed license from GPL to LGPL
+	- Added BL/Saint Barthelemy, MF/Saint Martin (ISO-3166-1 additions)
 	- getCountry method works with GeoIP City as well as GeoIP Country (Frank Mather)
 	
 1.6	February 20th, 2007
