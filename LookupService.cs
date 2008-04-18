@@ -270,31 +270,6 @@ public class LookupService{
                 Console.Write(e.Message);
                 return 0;
             }
-            return getID(swapbytes(addr.Address));
-    }
-
-    public int getID(IPAddress ipAddress) {
-        
-        return getCountry(swapbytes(ipAddress.Address));
-    }
-
-    public int getID(long ipAddress){
-      if (file == null) {
-           throw new Exception("Database has been closed.");
-      }
-      int ret = seekCountry(ipAddress) - databaseSegments[0];
-      return ret;
-    }
-
-    public int getID(String ipAddress){
-           IPAddress addr;
-            try {
-                addr = IPAddress.Parse(ipAddress);
-            }
-            catch (Exception e) {
-                Console.Write(e.Message);
-                return 0;
-            }
             return getID(bytestoLong(addr.GetAddressBytes()));
     }
 

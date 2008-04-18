@@ -6,13 +6,13 @@ Should also work in Windows C# environment.
 
 To compile the examples
 For country example
-mono /usr/local/bin/mcs.exe countryExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs 
+mono /usr/local/bin/mcs.exe countryExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs
 
 For city example
-mono /usr/local/bin/mcs.exe cityExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs
+mono /usr/local/bin/mcs.exe cityExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs
 
 for region example
-mono /usr/local/bin/mcs.exe regionExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs
+mono /usr/local/bin/mcs.exe regionExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs
 
 to run the examples
 
