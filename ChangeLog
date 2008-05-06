@@ -1,3 +1,6 @@
+1.8	May 6th, 2008
+	- remove duplicate getID functions using swapbytes in flavor of bytestoLong (Boris Zentner)
+
 1.7	March 18th, 2008
 	- Changed license from GPL to LGPL
 	- Added BL/Saint Barthelemy, MF/Saint Martin (ISO-3166-1 additions)
