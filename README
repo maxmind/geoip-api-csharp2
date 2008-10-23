@@ -1,4 +1,4 @@
-GeoIP C# API 1.8
+GeoIP C# API 1.10
 ================
 
 Instructions for Mono - see http://www.mono-project.com/
@@ -6,13 +6,13 @@ Should also work in Windows C# environment.
 
 To compile the examples
 For country example
-mono /usr/local/bin/mcs.exe countryExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs
+mono /usr/local/bin/mcs.exe countryExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
 
 For city example
-mono /usr/local/bin/mcs.exe cityExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs
+mono /usr/local/bin/mcs.exe cityExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
 
 for region example
-mono /usr/local/bin/mcs.exe regionExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs
+mono /usr/local/bin/mcs.exe regionExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
 
 to run the examples
 

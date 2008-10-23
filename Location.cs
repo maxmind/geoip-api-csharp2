@@ -33,6 +33,8 @@ public class Location {
     public double longitude;
     public int dma_code;
     public int area_code;
+    public String regionName;
+    public int metro_code;
 
     private static double EARTH_DIAMETER = 2 * 6378.2;
     private static double PI = 3.14159265;

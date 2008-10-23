@@ -17,8 +17,9 @@ class Appa0{
           Console.Write("postal code " + l.postalCode + "\n");
           Console.Write("latitude " + l.latitude + "\n");
           Console.Write("longitude " + l.longitude + "\n");
-          Console.Write("dma code " + l.dma_code + "\n");
+          Console.Write("metro code " + l.metro_code + "\n");
           Console.Write("area code " + l.area_code + "\n");
+          Console.Write("region name " + l.regionName + "\n");
         } else {
           Console.Write("IP Address Not Found\n");
         }
