@@ -1,4 +1,4 @@
-/* Copyright 2008 Maxmind LLC All Rights Reserved */
+/* Copyright 2009 Maxmind LLC All Rights Reserved */
 
 using System;
 using System.Collections;
@@ -133,6 +133,7 @@ public static class RegionName
         cc_reg_AO.Add( "09", "Huila" );
         cc_reg_AO.Add( "10", "Luanda" );
         cc_reg_AO.Add( "12", "Malanje" );
+        cc_reg_AO.Add( "13", "Namibe" );
         cc_reg_AO.Add( "14", "Moxico" );
         cc_reg_AO.Add( "15", "Uige" );
         cc_reg_AO.Add( "16", "Zaire" );
@@ -448,6 +449,7 @@ public static class RegionName
         cc_reg_BH.Add( "03", "Al Muharraq" );
         cc_reg_BH.Add( "05", "Jidd Hafs" );
         cc_reg_BH.Add( "06", "Sitrah" );
+        cc_reg_BH.Add( "07", "Ar Rifa' wa al Mintaqah al Janubiyah" );
         cc_reg_BH.Add( "08", "Al Mintaqah al Gharbiyah" );
         cc_reg_BH.Add( "09", "Mintaqat Juzur Hawar" );
         cc_reg_BH.Add( "10", "Al Mintaqah ash Shamaliyah" );
@@ -486,7 +488,18 @@ public static class RegionName
         cc_reg_BJ.Add( "04", "Mono" );
         cc_reg_BJ.Add( "05", "Oueme" );
         cc_reg_BJ.Add( "06", "Zou" );
+        cc_reg_BJ.Add( "07", "Alibori" );
+        cc_reg_BJ.Add( "08", "Atakora" );
+        cc_reg_BJ.Add( "09", "Atlanyique" );
+        cc_reg_BJ.Add( "10", "Borgou" );
+        cc_reg_BJ.Add( "11", "Collines" );
+        cc_reg_BJ.Add( "12", "Kouffo" );
+        cc_reg_BJ.Add( "13", "Donga" );
         cc_reg_BJ.Add( "14", "Littoral" );
+        cc_reg_BJ.Add( "15", "Mono" );
+        cc_reg_BJ.Add( "16", "Oueme" );
+        cc_reg_BJ.Add( "17", "Plateau" );
+        cc_reg_BJ.Add( "18", "Zou" );
         GEOIP_REGION_NAME.Add( "BJ", cc_reg_BJ );
         Hashtable cc_reg_BM = new Hashtable();
         cc_reg_BM.Add( "01", "Devonshire" );
@@ -715,6 +728,8 @@ public static class RegionName
         cc_reg_CH.Add( "26", "Jura" );
         GEOIP_REGION_NAME.Add( "CH", cc_reg_CH );
         Hashtable cc_reg_CI = new Hashtable();
+        cc_reg_CI.Add( "05", "Atacama" );
+        cc_reg_CI.Add( "06", "Biobio" );
         cc_reg_CI.Add( "51", "Sassandra" );
         cc_reg_CI.Add( "61", "Abidjan" );
         cc_reg_CI.Add( "74", "Agneby" );
@@ -802,8 +817,8 @@ public static class RegionName
         cc_reg_CO.Add( "02", "Antioquia" );
         cc_reg_CO.Add( "03", "Arauca" );
         cc_reg_CO.Add( "04", "Atlantico" );
-        cc_reg_CO.Add( "05", "Bolívar Department" );
-        cc_reg_CO.Add( "06", "Boyacá Department" );
+        cc_reg_CO.Add( "05", "Bolivar Department" );
+        cc_reg_CO.Add( "06", "Boyaca Department" );
         cc_reg_CO.Add( "07", "Caldas Department" );
         cc_reg_CO.Add( "08", "Caqueta" );
         cc_reg_CO.Add( "09", "Cauca" );
@@ -1992,7 +2007,7 @@ public static class RegionName
         cc_reg_IR.Add( "15", "Khuzestan" );
         cc_reg_IR.Add( "16", "Kordestan" );
         cc_reg_IR.Add( "17", "Mazandaran" );
-        cc_reg_IR.Add( "18", "Semnān Province" );
+        cc_reg_IR.Add( "18", "Semnan Province" );
         cc_reg_IR.Add( "19", "Markazi" );
         cc_reg_IR.Add( "21", "Zanjan" );
         cc_reg_IR.Add( "22", "Bushehr" );
@@ -2165,24 +2180,26 @@ public static class RegionName
         cc_reg_KG.Add( "09", "Batken" );
         GEOIP_REGION_NAME.Add( "KG", cc_reg_KG );
         Hashtable cc_reg_KH = new Hashtable();
+        cc_reg_KH.Add( "00", "Banteay Meanchey" );
+        cc_reg_KH.Add( "01", "Batdambang" );
         cc_reg_KH.Add( "02", "Kampong Cham" );
         cc_reg_KH.Add( "03", "Kampong Chhnang" );
-        cc_reg_KH.Add( "04", "Kampong Spoe" );
+        cc_reg_KH.Add( "04", "Kampong Speu" );
         cc_reg_KH.Add( "05", "Kampong Thum" );
         cc_reg_KH.Add( "06", "Kampot" );
         cc_reg_KH.Add( "07", "Kandal" );
-        cc_reg_KH.Add( "08", "Kaoh Kong" );
+        cc_reg_KH.Add( "08", "Koh Kong" );
         cc_reg_KH.Add( "09", "Kracheh" );
-        cc_reg_KH.Add( "10", "Mondol Kiri" );
+        cc_reg_KH.Add( "10", "Mondulkiri" );
         cc_reg_KH.Add( "11", "Phnum Penh" );
-        cc_reg_KH.Add( "12", "Pouthisat" );
+        cc_reg_KH.Add( "12", "Pursat" );
         cc_reg_KH.Add( "13", "Preah Vihear" );
         cc_reg_KH.Add( "14", "Prey Veng" );
-        cc_reg_KH.Add( "15", "Rotanokiri" );
-        cc_reg_KH.Add( "16", "Siemreab-Otdar Meanchey" );
-        cc_reg_KH.Add( "17", "Stoeng Treng" );
+        cc_reg_KH.Add( "15", "Ratanakiri Kiri" );
+        cc_reg_KH.Add( "16", "Siem Reap" );
+        cc_reg_KH.Add( "17", "Stung Treng" );
         cc_reg_KH.Add( "18", "Svay Rieng" );
-        cc_reg_KH.Add( "19", "Takev" );
+        cc_reg_KH.Add( "19", "Takeo" );
         cc_reg_KH.Add( "29", "Batdambang" );
         cc_reg_KH.Add( "30", "Pailin" );
         GEOIP_REGION_NAME.Add( "KH", cc_reg_KH );
@@ -3030,6 +3047,8 @@ public static class RegionName
         cc_reg_NI.Add( "14", "Rio San Juan" );
         cc_reg_NI.Add( "15", "Rivas" );
         cc_reg_NI.Add( "16", "Zelaya" );
+        cc_reg_NI.Add( "17", "Autonoma Atlantico Norte" );
+        cc_reg_NI.Add( "18", "Region Autonoma Atlantico Sur" );
         GEOIP_REGION_NAME.Add( "NI", cc_reg_NI );
         Hashtable cc_reg_NL = new Hashtable();
         cc_reg_NL.Add( "01", "Drenthe" );
@@ -3509,7 +3528,6 @@ public static class RegionName
         cc_reg_RO.Add( "43", "Ilfov" );
         GEOIP_REGION_NAME.Add( "RO", cc_reg_RO );
         Hashtable cc_reg_RS = new Hashtable();
-        cc_reg_RS.Add( "00", "Serbia proper" );
         cc_reg_RS.Add( "01", "Kosovo" );
         cc_reg_RS.Add( "02", "Vojvodina" );
         GEOIP_REGION_NAME.Add( "RS", cc_reg_RS );
@@ -3605,6 +3623,7 @@ public static class RegionName
         cc_reg_RU.Add( "89", "Yevrey" );
         cc_reg_RU.Add( "90", "Permskiy Kray" );
         cc_reg_RU.Add( "91", "Krasnoyarskiy Kray" );
+        cc_reg_RU.Add( "CI", "Chechnya Republic" );
         GEOIP_REGION_NAME.Add( "RU", cc_reg_RU );
         Hashtable cc_reg_RW = new Hashtable();
         cc_reg_RW.Add( "01", "Butare" );
@@ -3678,6 +3697,8 @@ public static class RegionName
         cc_reg_SD.Add( "33", "Darfur" );
         cc_reg_SD.Add( "34", "Kurdufan" );
         cc_reg_SD.Add( "35", "Upper Nile" );
+        cc_reg_SD.Add( "40", "Al Wahadah State" );
+        cc_reg_SD.Add( "44", "Central Equatoria State" );
         GEOIP_REGION_NAME.Add( "SD", cc_reg_SD );
         Hashtable cc_reg_SE = new Hashtable();
         cc_reg_SE.Add( "01", "Alvsborgs Lan" );
@@ -4070,8 +4091,10 @@ public static class RegionName
         cc_reg_TH.Add( "70", "Yala" );
         cc_reg_TH.Add( "71", "Ubon Ratchathani" );
         cc_reg_TH.Add( "72", "Yasothon" );
+        cc_reg_TH.Add( "73", "Nakhon Phanom" );
         cc_reg_TH.Add( "75", "Ubon Ratchathani" );
         cc_reg_TH.Add( "76", "Udon Thani" );
+        cc_reg_TH.Add( "77", "Amnat Charoen" );
         cc_reg_TH.Add( "78", "Mukdahan" );
         GEOIP_REGION_NAME.Add( "TH", cc_reg_TH );
         Hashtable cc_reg_TJ = new Hashtable();
@@ -4099,10 +4122,11 @@ public static class RegionName
         cc_reg_TN.Add( "19", "Nabul" );
         cc_reg_TN.Add( "22", "Silyanah" );
         cc_reg_TN.Add( "23", "Susah" );
+        cc_reg_TN.Add( "26", "Chaiyaphum Province" );
         cc_reg_TN.Add( "27", "Bin" );
         cc_reg_TN.Add( "28", "Madanin" );
         cc_reg_TN.Add( "29", "Qabis" );
-        cc_reg_TN.Add( "30", "Qafşah" );
+        cc_reg_TN.Add( "30", "Qafsah" );
         cc_reg_TN.Add( "31", "Qibili" );
         cc_reg_TN.Add( "32", "Safaqis" );
         cc_reg_TN.Add( "33", "Sidi Bu Zayd" );
@@ -4289,12 +4313,17 @@ public static class RegionName
         cc_reg_UG.Add( "23", "Northern" );
         cc_reg_UG.Add( "24", "Southern" );
         cc_reg_UG.Add( "25", "Western" );
+        cc_reg_UG.Add( "33", "Jinja" );
+        cc_reg_UG.Add( "36", "Kalangala" );
         cc_reg_UG.Add( "37", "Kampala" );
+        cc_reg_UG.Add( "42", "Kiboga" );
+        cc_reg_UG.Add( "52", "Mbarara" );
         cc_reg_UG.Add( "56", "Mubende" );
         cc_reg_UG.Add( "65", "Adjumani" );
         cc_reg_UG.Add( "66", "Bugiri" );
         cc_reg_UG.Add( "67", "Busia" );
         cc_reg_UG.Add( "69", "Katakwi" );
+        cc_reg_UG.Add( "71", "Masaka" );
         cc_reg_UG.Add( "73", "Nakasongola" );
         cc_reg_UG.Add( "74", "Sembabule" );
         cc_reg_UG.Add( "77", "Arua" );
@@ -4534,6 +4563,7 @@ public static class RegionName
         cc_reg_VN.Add( "83", "Phu Tho" );
         cc_reg_VN.Add( "84", "Quang Nam" );
         cc_reg_VN.Add( "85", "Thai Nguyen" );
+        cc_reg_VN.Add( "86", "Vinh Puc Province" );
         cc_reg_VN.Add( "87", "Can Tho" );
         cc_reg_VN.Add( "88", "Dak Lak" );
         cc_reg_VN.Add( "89", "Lai Chau" );
@@ -4590,6 +4620,7 @@ public static class RegionName
         cc_reg_YE.Add( "25", "Ta" );
         GEOIP_REGION_NAME.Add( "YE", cc_reg_YE );
         Hashtable cc_reg_ZA = new Hashtable();
+        cc_reg_ZA.Add( "01", "North-Western Province" );
         cc_reg_ZA.Add( "02", "KwaZulu-Natal" );
         cc_reg_ZA.Add( "03", "Free State" );
         cc_reg_ZA.Add( "05", "Eastern Cape" );
