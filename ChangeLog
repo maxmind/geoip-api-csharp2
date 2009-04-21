@@ -1,7 +1,7 @@
 	- Fixed spelling of Kazakhstan, was Kazakstan ( Boris Zentner )
 	- Sync RegionName.cs with more recent FIPS codes. ( Boris Zentner )
 1.10	Oct 23th, 2008
-	- Remove record.dma_code -- use recod.metro_code instead. ( Boris Zentner )
+	- Remove record.dma_code -- use record.metro_code instead. ( Boris Zentner )
 1.9	Oct 22th, 2008
 	- Add new static class RegionName. use RegionName.getRegionName("FR", "02") to get the region name. rec.regionName does work for city records ( Boris Zentner )
 1.8	May 6th, 2008
