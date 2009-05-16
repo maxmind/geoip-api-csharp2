@@ -1,3 +1,6 @@
+1.11	May 16th, 2009
+	- Fix IndexOutOfRangeException error when a lookup end in the last valid
+	      netblock using GEOIP_MEMORY_CACHE mode ( Boris Zentner )
 	- Fixed spelling of Kazakhstan, was Kazakstan ( Boris Zentner )
 	- Sync RegionName.cs with more recent FIPS codes. ( Boris Zentner )
 1.10	Oct 23th, 2008

@@ -429,9 +429,7 @@ public class LookupService{
             }
             record_pointer = Seek_country + ((2 * recordLength - 1) * databaseSegments[0]);
             if ((dboptions & GEOIP_MEMORY_CACHE) == 1){
-	      for (int i = 0;i < FULL_RECORD_LENGTH;i++){
-		record_buf[i] = dbbuffer[i+record_pointer];
-	      }
+              Array.Copy(dbbuffer, record_pointer, record_buf, 0, Math.Min(dbbuffer.Length - record_pointer, FULL_RECORD_LENGTH));
 	    } else {
 	    file.Seek(record_pointer,SeekOrigin.Begin);
             file.Read(record_buf,0,FULL_RECORD_LENGTH);
@@ -534,9 +532,7 @@ public class LookupService{
 
             record_pointer = Seek_org + (2 * recordLength - 1) * databaseSegments[0];
             if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
-	      for (int i = 0;i < MAX_ORG_RECORD_LENGTH;i++) {
-		buf[i] = dbbuffer[i+record_pointer];
-	      }
+              Array.Copy(dbbuffer, record_pointer, buf, 0, Math.Min(dbbuffer.Length - record_pointer, MAX_ORG_RECORD_LENGTH));
 	    } else {
 	      file.Seek(record_pointer,SeekOrigin.Begin);
               file.Read(buf,0,MAX_ORG_RECORD_LENGTH);
