@@ -22,6 +22,8 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Runtime.CompilerServices;
+
 public class LookupService{
     private FileStream file = null;
     private DatabaseInfo databaseInfo = null;
@@ -137,7 +139,7 @@ public class LookupService{
 	   this.file = new FileStream(databaseFile, FileMode.Open, FileAccess.Read);
 	   dboptions = options;
            init();
-        } catch(System.SystemException e) {
+        } catch(System.SystemException) {
            Console.Write("cannot open file " + databaseFile + "\n");
         }
     }
@@ -217,7 +219,7 @@ public class LookupService{
             file.Close();
             file = null;
         }
-        catch (Exception e) { }
+        catch (Exception) { }
     }
     public Country getCountry(IPAddress ipAddress) {
         return getCountry(bytestoLong(ipAddress.GetAddressBytes()));
@@ -291,11 +293,10 @@ public class LookupService{
         }
         try {
             // Synchronize since we're accessing the database file.
-            //synchronized (this) {
+            lock (this) {
                 bool hasStructureInfo = false;
                 byte [] delim = new byte[3];
                 // Advance to part of file where database info is stored.
-                //file.Seek(file.length() - 3);
                 file.Seek(-3,SeekOrigin.End);
 		for (int i=0; i<STRUCTURE_INFO_MAX_SIZE; i++) {
                     file.Read(delim,0,3);
@@ -305,12 +306,10 @@ public class LookupService{
                     }
                 }
                 if (hasStructureInfo) {
-                    //file.Seek(file.getFilePointer() - 3);
                     file.Seek(-3,SeekOrigin.Current);
 		}
                 else {
                     // No structure info, must be pre Sep 2002 database, go back to end.
-                    //file.Seek(file.length() - 3);
                     file.Seek(-3,SeekOrigin.End);
                 }
                 // Find the database info string.
@@ -327,10 +326,9 @@ public class LookupService{
                         this.databaseInfo = new DatabaseInfo(new String(dbInfo2));
                         return databaseInfo;
                    }
-                    //file.Seek(file.getFilePointer() -4);
                     file.Seek(-4,SeekOrigin.Current);
 		}
-            //}
+            }
         }
         catch (Exception e) {
             Console.Write(e.Message);
@@ -353,6 +351,8 @@ public class LookupService{
 
             return getRegion(bytestoLong(addr.GetAddressBytes()));
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Region getRegion(long ipnum){
             Region record = new Region();
 	    int seek_region = 0;
@@ -412,6 +412,8 @@ public class LookupService{
 
             return getLocation(bytestoLong(addr.GetAddressBytes()));
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Location getLocation(long ipnum){
         int record_pointer;
         byte[] record_buf = new byte[FULL_RECORD_LENGTH];
@@ -496,7 +498,7 @@ public class LookupService{
                 }
             }
         }
-        catch (IOException e) {
+        catch (IOException) {
             Console.Write("IO Exception while seting up segments");
         }
         return record;
@@ -516,6 +518,8 @@ public class LookupService{
             }
             return getOrg(bytestoLong(addr.GetAddressBytes()));
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public String getOrg(long ipnum){
             int Seek_org;
         int record_pointer;
@@ -545,11 +549,13 @@ public class LookupService{
 	    org_buf = new String(buf2,0,str_length);
             return org_buf;
         }
-        catch (IOException e) {
+        catch (IOException) {
             Console.Write("IO Exception");
             return null;
         }
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     private int SeekCountry(long ipAddress){
             byte [] buf = new byte[2 * MAX_RECORD_LENGTH];
             int [] x = new int[2];
@@ -565,7 +571,7 @@ public class LookupService{
 		    file.Read(buf,0,2 * MAX_RECORD_LENGTH);
 		}
 	    }
-            catch (IOException e) {
+            catch (IOException) {
                 Console.Write("IO Exception");
             }
             for (int i = 0; i<2; i++) {
