@@ -55,7 +55,7 @@ public class DatabaseInfo {
             // Get the type code from the database info string and then
             // subtract 105 from the value to preserve compatability with
             // databases from April 2003 and earlier.
-            return Convert.ToInt32(info.Substring(4, 7)) - 105;
+            return Convert.ToInt32(info.Substring(4, 3)) - 105;
         }
     }
 
@@ -76,7 +76,7 @@ public class DatabaseInfo {
     public DateTime getDate() {
         for (int i=0; i<info.Length-9; i++) {
             if (Char.IsWhiteSpace(info[i]) == true) {
-               String dateString = info.Substring(i+1, i+9);
+               String dateString = info.Substring(i+1, 8);
                 try {
                     //synchronized (formatter) {
                         return DateTime.ParseExact(dateString,"yyyyMMdd",null);

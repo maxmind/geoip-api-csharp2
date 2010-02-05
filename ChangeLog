@@ -1,3 +1,4 @@
+	- Fix getDate and getType ( Richard Régul )
 1.12	Aug 18th, 2009
 	- Sync RegionName.cs with more recent FIPS codes ( 20090723 ). ( Boris Zentner )
 	- Guard most functions in lookupService by either lock or [MethodImpl(MethodImplOptions.Synchronized)] ( Kfir Harel )
