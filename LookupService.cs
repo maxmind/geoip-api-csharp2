@@ -175,13 +175,28 @@ public class LookupService{
                 } else if (databaseType == DatabaseInfo.CITY_EDITION_REV0 ||
                         databaseType == DatabaseInfo.CITY_EDITION_REV1 ||
                         databaseType == DatabaseInfo.ORG_EDITION ||
+                        databaseType == DatabaseInfo.ORG_EDITION_V6 ||
                         databaseType == DatabaseInfo.ISP_EDITION ||
-                        databaseType == DatabaseInfo.ASNUM_EDITION)
+                        databaseType == DatabaseInfo.ISP_EDITION_V6 ||
+                        databaseType == DatabaseInfo.ASNUM_EDITION ||
+                        databaseType == DatabaseInfo.ASNUM_EDITION_V6 ||
+                        databaseType == DatabaseInfo.NETSPEED_EDITION_REV1 ||
+			databaseType == DatabaseInfo.NETSPEED_EDITION_REV1_V6 ||
+                        databaseType == DatabaseInfo.CITY_EDITION_REV0_V6 ||
+			databaseType == DatabaseInfo.CITY_EDITION_REV1_V6
+                        )
                 {
                     databaseSegments = new int[1];
                     databaseSegments[0] = 0;
                     if (databaseType == DatabaseInfo.CITY_EDITION_REV0 ||
-                        databaseType == DatabaseInfo.CITY_EDITION_REV1) {
+                        databaseType == DatabaseInfo.CITY_EDITION_REV1 ||
+                        databaseType == DatabaseInfo.ASNUM_EDITION_V6 ||
+                        databaseType == DatabaseInfo.NETSPEED_EDITION_REV1 ||
+		        databaseType == DatabaseInfo.NETSPEED_EDITION_REV1_V6 ||
+                        databaseType == DatabaseInfo.CITY_EDITION_REV0_V6 ||
+	    	        databaseType == DatabaseInfo.CITY_EDITION_REV1_V6 ||
+      	      	        databaseType == DatabaseInfo.ASNUM_EDITION
+                        ) {
                         recordLength = STANDARD_RECORD_LENGTH;
                     }
                     else {
@@ -200,8 +215,9 @@ public class LookupService{
 	        //file.Seek(file.position-4,SeekOrigin.Begin);
 	    }
         }
-        if ((databaseType == DatabaseInfo.COUNTRY_EDITION) | 
-            (databaseType == DatabaseInfo.PROXY_EDITION) |
+        if ((databaseType == DatabaseInfo.COUNTRY_EDITION) ||
+          (databaseType == DatabaseInfo.COUNTRY_EDITION_V6) ||
+            (databaseType == DatabaseInfo.PROXY_EDITION) ||
             (databaseType == DatabaseInfo.NETSPEED_EDITION)) {
             databaseSegments = new int[1];
             databaseSegments[0] = COUNTRY_BEGIN;
@@ -224,7 +240,19 @@ public class LookupService{
     public Country getCountry(IPAddress ipAddress) {
         return getCountry(bytestoLong(ipAddress.GetAddressBytes()));
     }
-    public Country getCountry(String ipAddress){
+    public Country getCountryV6(String ipAddress){
+           IPAddress addr;
+            try {
+                addr = IPAddress.Parse(ipAddress);
+            }
+            //catch (UnknownHostException e) {
+            catch (Exception e) {
+                Console.Write(e.Message);
+                return UNKNOWN_COUNTRY;
+            }
+            return getCountryV6(addr);
+    }
+      public Country getCountry(String ipAddress){
            IPAddress addr;
             try {
                 addr = IPAddress.Parse(ipAddress);
@@ -237,6 +265,32 @@ public class LookupService{
           //  return getCountry(bytestoLong(addr.GetAddressBytes()));
             return getCountry(bytestoLong(addr.GetAddressBytes()));
     }
+    public Country getCountryV6(IPAddress ipAddress){
+        if (file == null) {
+            //throw new IllegalStateException("Database has been closed.");
+            throw new Exception("Database has been closed.");
+        }
+        if ((databaseType == DatabaseInfo.CITY_EDITION_REV1) | 
+        (databaseType == DatabaseInfo.CITY_EDITION_REV0)) {
+            Location l = getLocation(ipAddress);
+            if (l == null) {
+                return UNKNOWN_COUNTRY;
+            } 
+            else {
+                return new Country(l.countryCode, l.countryName);
+            }
+        } 
+        else {
+            int ret = SeekCountryV6(ipAddress) - COUNTRY_BEGIN;
+            if (ret == 0) {
+                return UNKNOWN_COUNTRY;
+            }
+            else {
+                return new Country(countryCode[ret], countryName[ret]);
+            }
+        }
+    }
+
     public Country getCountry(long ipAddress){
         if (file == null) {
             //throw new IllegalStateException("Database has been closed.");
@@ -400,6 +454,19 @@ public class LookupService{
     public Location getLocation(IPAddress addr){
            return getLocation(bytestoLong(addr.GetAddressBytes()));
     }
+    public Location getLocationV6(String str){
+            IPAddress addr;
+	    try {
+                addr = IPAddress.Parse(str);
+            }
+            catch (Exception e) {
+                Console.Write(e.Message);
+		return null;
+            }
+
+            return getLocationV6(addr);
+    }
+
     public Location getLocation(String str){
             IPAddress addr;
 	    try {
@@ -413,6 +480,97 @@ public class LookupService{
             return getLocation(bytestoLong(addr.GetAddressBytes()));
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    public Location getLocationV6(IPAddress addr){
+        int record_pointer;
+        byte[] record_buf = new byte[FULL_RECORD_LENGTH];
+        char[] record_buf2 = new char[FULL_RECORD_LENGTH];
+        int record_buf_offset = 0;
+        Location record = new Location();
+        int str_length = 0;
+        int j, Seek_country;
+        double latitude = 0, longitude = 0;
+
+        try {
+            Seek_country = SeekCountryV6(addr);
+            if (Seek_country == databaseSegments[0]) {
+                return null;
+            }
+            record_pointer = Seek_country + ((2 * recordLength - 1) * databaseSegments[0]);
+            if ((dboptions & GEOIP_MEMORY_CACHE) == 1){
+              Array.Copy(dbbuffer, record_pointer, record_buf, 0, Math.Min(dbbuffer.Length - record_pointer, FULL_RECORD_LENGTH));
+	    } else {
+	    file.Seek(record_pointer,SeekOrigin.Begin);
+            file.Read(record_buf,0,FULL_RECORD_LENGTH);
+	    }
+	    for (int a0 = 0;a0 < FULL_RECORD_LENGTH;a0++){
+                record_buf2[a0] = Convert.ToChar(record_buf[a0]);
+	    }
+            // get country
+            record.countryCode = countryCode[unsignedByteToInt(record_buf[0])];
+            record.countryName = countryName[unsignedByteToInt(record_buf[0])];
+            record_buf_offset++;
+
+            // get region
+            while (record_buf[record_buf_offset + str_length] != '\0')
+                str_length++;
+            if (str_length > 0) {
+                record.region = new String(record_buf2, record_buf_offset, str_length);
+            }
+            record_buf_offset += str_length + 1;
+            str_length = 0;
+
+            // get region_name
+	    record.regionName = RegionName.getRegionName( record.countryCode, record.region );
+
+            // get city
+            while (record_buf[record_buf_offset + str_length] != '\0')
+                str_length++;
+            if (str_length > 0) {
+                record.city = new String(record_buf2, record_buf_offset, str_length);
+            }
+            record_buf_offset += (str_length + 1);
+            str_length = 0;
+
+            // get postal code
+            while (record_buf[record_buf_offset + str_length] != '\0')
+                str_length++;
+           if (str_length > 0) {
+                record.postalCode = new String(record_buf2, record_buf_offset, str_length);
+            }
+            record_buf_offset += (str_length + 1);
+
+            // get latitude
+            for (j = 0; j < 3; j++)
+                latitude += (unsignedByteToInt(record_buf[record_buf_offset + j]) << (j * 8));
+            record.latitude = (float) latitude/10000 - 180;
+            record_buf_offset += 3;
+
+            // get longitude
+            for (j = 0; j < 3; j++)
+                longitude += (unsignedByteToInt(record_buf[record_buf_offset + j]) << (j * 8));
+                record.longitude = (float) longitude/10000 - 180;
+
+            record.metro_code = record.dma_code = 0;
+            record.area_code = 0;
+            if (databaseType == DatabaseInfo.CITY_EDITION_REV1
+              ||databaseType == DatabaseInfo.CITY_EDITION_REV1_V6) {
+                // get metro_code
+                int metroarea_combo = 0;
+                if (record.countryCode == "US"){
+                   record_buf_offset += 3;
+                    for (j = 0; j < 3; j++)
+                        metroarea_combo += (unsignedByteToInt(record_buf[record_buf_offset + j]) << (j * 8));
+                    record.metro_code = record.dma_code = metroarea_combo/1000;
+                    record.area_code = metroarea_combo % 1000;
+                }
+            }
+        }
+        catch (IOException) {
+            Console.Write("IO Exception while seting up segments");
+        }
+        return record;
+    }
     [MethodImpl(MethodImplOptions.Synchronized)]
     public Location getLocation(long ipnum){
         int record_pointer;
@@ -506,6 +664,20 @@ public class LookupService{
     public String getOrg(IPAddress addr) {
         return getOrg(bytestoLong(addr.GetAddressBytes()));
     }
+
+    public String getOrgV6(String str){
+            IPAddress addr;
+            try {
+                addr = IPAddress.Parse(str);
+            }
+            //catch (UnknownHostException e) {
+            catch (Exception e){
+	    Console.Write(e.Message);
+	    return null;
+            }
+            return getOrgV6(addr);
+    }
+
     public String getOrg(String str){
             IPAddress addr;
             try {
@@ -517,6 +689,42 @@ public class LookupService{
 	    return null;
             }
             return getOrg(bytestoLong(addr.GetAddressBytes()));
+    }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    public String getOrgV6( IPAddress addr){
+            int Seek_org;
+        int record_pointer;
+        int str_length = 0;
+        byte [] buf = new byte[MAX_ORG_RECORD_LENGTH];
+        char [] buf2 = new char[MAX_ORG_RECORD_LENGTH];
+	String org_buf;
+
+        try {
+            Seek_org = SeekCountryV6(addr);
+            if (Seek_org == databaseSegments[0]) {
+            return null;
+            }
+
+            record_pointer = Seek_org + (2 * recordLength - 1) * databaseSegments[0];
+            if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
+              Array.Copy(dbbuffer, record_pointer, buf, 0, Math.Min(dbbuffer.Length - record_pointer, MAX_ORG_RECORD_LENGTH));
+	    } else {
+	      file.Seek(record_pointer,SeekOrigin.Begin);
+              file.Read(buf,0,MAX_ORG_RECORD_LENGTH);
+            }
+	    while (buf[str_length] != 0) {
+            buf2[str_length] = Convert.ToChar(buf[str_length]);
+	    str_length++;
+            }
+            buf2[str_length] = '\0';
+	    org_buf = new String(buf2,0,str_length);
+            return org_buf;
+        }
+        catch (IOException) {
+            Console.Write("IO Exception");
+            return null;
+        }
     }
 
     [MethodImpl(MethodImplOptions.Synchronized)]
@@ -553,6 +761,61 @@ public class LookupService{
             Console.Write("IO Exception");
             return null;
         }
+    }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    private int SeekCountryV6(IPAddress ipAddress){
+            byte [] v6vec = ipAddress.GetAddressBytes();      
+            byte [] buf = new byte[2 * MAX_RECORD_LENGTH];
+            int [] x = new int[2];
+        int offset = 0;
+	for (int depth = 127; depth >= 0; depth--) {
+	    try {
+		if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
+		    for (int i = 0;i < (2 * MAX_RECORD_LENGTH);i++) {
+			buf[i] = dbbuffer[i+(2 * recordLength * offset)];
+		    }
+		} else {
+		    file.Seek(2 * recordLength * offset,SeekOrigin.Begin);
+		    file.Read(buf,0,2 * MAX_RECORD_LENGTH);
+		}
+	    }
+            catch (IOException) {
+                Console.Write("IO Exception");
+            }
+            for (int i = 0; i<2; i++) {
+                x[i] = 0;
+                for (int j = 0; j<recordLength; j++) {
+                    int y = buf[(i*recordLength)+j];
+                    if (y < 0) {
+                        y+= 256;
+                    }
+                    x[i] += (y << (j * 8));
+                }
+            }
+
+
+            int bnum = 127 - depth;
+            int idx = bnum >> 3;
+            int b_mask = 1 << ( bnum & 7 ^ 7 );
+            if ((v6vec[idx] & b_mask) > 0) {
+                if (x[1] >= databaseSegments[0]) {
+		    return x[1];
+                }
+                offset = x[1];
+            }
+            else {
+                if (x[0] >= databaseSegments[0]) {
+                    return x[0];
+                }
+                offset = x[0];
+            }
+        }
+
+        // shouldn't reach here
+        Console.Write("Error Seeking country while Seeking " + ipAddress);
+	return 0;
+
     }
 
     [MethodImpl(MethodImplOptions.Synchronized)]

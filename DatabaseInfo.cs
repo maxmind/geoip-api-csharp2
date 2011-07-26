@@ -34,6 +34,17 @@ public class DatabaseInfo {
     public static int PROXY_EDITION = 8;
     public static int ASNUM_EDITION = 9;
     public static int NETSPEED_EDITION = 10;
+    public static int  DOMAIN_EDITION      = 11;
+    public static int COUNTRY_EDITION_V6 = 12;
+    public static int ASNUM_EDITION_V6         = 21;
+    public static int ISP_EDITION_V6           = 22;
+    public static int ORG_EDITION_V6           = 23;
+    public static int DOMAIN_EDITION_V6        = 24;
+    public static int CITY_EDITION_REV1_V6     = 30;
+    public static int CITY_EDITION_REV0_V6     = 31;
+    public static int NETSPEED_EDITION_REV1    = 32;
+    public static int NETSPEED_EDITION_REV1_V6 = 33;
+    
 
     //private static SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 

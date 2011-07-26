@@ -1,17 +1,24 @@
-GeoIP C# API 1.12
+GeoIP C# API 1.14
 ================
 
-As of version 1.12 this API is thread safe.
+As of version 1.14 this API is thread safe.
 
 Instructions for Mono - see http://www.mono-project.com/
 Should also work in Windows C# environment.
 
 To compile the examples
+
 For country example
 mono /usr/local/bin/mcs.exe countryExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
 
 For city example
 mono /usr/local/bin/mcs.exe cityExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+
+For countryV6 example
+mono /usr/local/bin/mcs.exe countryV6Example.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+
+For cityV6 example
+mono /usr/local/bin/mcs.exe cityV6Example.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
 
 for region example
 mono /usr/local/bin/mcs.exe regionExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
@@ -22,10 +29,22 @@ for country example
 mono countryExample.exe
 
 for city example
-mono cityExample.exe
+mono cityExample.exe 24.24.24.24
 
 for org example
 mono orgExample.exe
+
+for asn example
+mono asnExample.exe
+
+for countryV6 example
+mono countryV6Example.exe
+
+for city example
+mono cityV6Example.exe ::24.24.24.24
+
+for asnV6 example
+mono asnV6Example.exe
 
 MEMORY CACHING
 
@@ -36,5 +55,5 @@ GEOIP_STANDARD - read database from filesystem, uses least memory.
 GEOIP_MEMORY_CACHE - load database into memory, faster performance
         but uses more memory
 
-Copyright 2009 MaxMind Inc
+Copyright 2011 MaxMind Inc
 Licensed under the LGPL
