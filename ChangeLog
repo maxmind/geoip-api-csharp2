@@ -1,3 +1,7 @@
+1.14	Jul 25th, 2011
+	- Add new database types for CountryV6, CityV6, ASNumV6 and ASNum ( Boris Zentner )
+1.13    Jan 21th, 2011
+        - Add ASNum support. ( Boris Zentner )
 	- Fix getDate and getType ( Richard Régul )
 1.12	Aug 18th, 2009
 	- Sync RegionName.cs with more recent FIPS codes ( 20090723 ). ( Boris Zentner )
