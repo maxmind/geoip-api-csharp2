@@ -2406,6 +2406,7 @@ public static class RegionName
         cc_reg_MD.Add( "79", "Leova" );
         cc_reg_MD.Add( "80", "Nisporeni" );
         cc_reg_MD.Add( "81", "Ocnita" );
+        cc_reg_MD.Add( "82", "Orhei" );
         cc_reg_MD.Add( "83", "Rezina" );
         cc_reg_MD.Add( "84", "Riscani" );
         cc_reg_MD.Add( "85", "Singerei" );
@@ -3387,7 +3388,7 @@ public static class RegionName
         cc_reg_RU.Add( "89", "Yevrey" );
         cc_reg_RU.Add( "90", "Permskiy Kray" );
         cc_reg_RU.Add( "91", "Krasnoyarskiy Kray" );
-        cc_reg_RU.Add( "CI", "Chechnya Republic" );
+        cc_reg_RU.Add( "92", "Kamchatskiy Kray" );
         GEOIP_REGION_NAME.Add( "RU", cc_reg_RU );
         Hashtable cc_reg_RW = new Hashtable();
         cc_reg_RW.Add( "01", "Butare" );
