@@ -1,3 +1,5 @@
+1.15	Mar 15th, 2012
+	- Update FIPS codes ( Boris Zentner )
 1.14	Jul 25th, 2011
 	- Add new database types for CountryV6, CityV6, ASNumV6 and ASNum ( Boris Zentner )
 1.13    Jan 21th, 2011
