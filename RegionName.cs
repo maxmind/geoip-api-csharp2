@@ -295,6 +295,8 @@ public static class RegionName
         cc_reg_BE.Add( "10", "Brabant Wallon" );
         cc_reg_BE.Add( "11", "Brussels Hoofdstedelijk Gewest" );
         cc_reg_BE.Add( "12", "Vlaams-Brabant" );
+        cc_reg_BE.Add( "13", "Flanders" );
+        cc_reg_BE.Add( "14", "Wallonia" );
         GEOIP_REGION_NAME.Add( "BE", cc_reg_BE );
         Hashtable cc_reg_BF = new Hashtable();
         cc_reg_BF.Add( "15", "Bam" );
@@ -739,9 +741,6 @@ public static class RegionName
         cc_reg_CO.Add( "02", "Antioquia" );
         cc_reg_CO.Add( "03", "Arauca" );
         cc_reg_CO.Add( "04", "Atlantico" );
-        cc_reg_CO.Add( "05", "Bolivar Department" );
-        cc_reg_CO.Add( "06", "Boyaca Department" );
-        cc_reg_CO.Add( "07", "Caldas Department" );
         cc_reg_CO.Add( "08", "Caqueta" );
         cc_reg_CO.Add( "09", "Cauca" );
         cc_reg_CO.Add( "10", "Cesar" );
@@ -751,7 +750,6 @@ public static class RegionName
         cc_reg_CO.Add( "15", "Guainia" );
         cc_reg_CO.Add( "16", "Huila" );
         cc_reg_CO.Add( "17", "La Guajira" );
-        cc_reg_CO.Add( "18", "Magdalena Department" );
         cc_reg_CO.Add( "19", "Meta" );
         cc_reg_CO.Add( "20", "Narino" );
         cc_reg_CO.Add( "21", "Norte de Santander" );
@@ -3389,6 +3387,7 @@ public static class RegionName
         cc_reg_RU.Add( "90", "Permskiy Kray" );
         cc_reg_RU.Add( "91", "Krasnoyarskiy Kray" );
         cc_reg_RU.Add( "92", "Kamchatskiy Kray" );
+        cc_reg_RU.Add( "93", "Zabaykal'skiy Kray" );
         GEOIP_REGION_NAME.Add( "RU", cc_reg_RU );
         Hashtable cc_reg_RW = new Hashtable();
         cc_reg_RW.Add( "01", "Butare" );
