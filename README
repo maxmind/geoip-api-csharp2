@@ -1,4 +1,4 @@
-GeoIP C# API 1.15
+GeoIP C# API 1.17
 ================
 
 As of version 1.14 this API is thread safe.
