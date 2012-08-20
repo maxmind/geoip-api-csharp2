@@ -3,6 +3,7 @@
 	- LookupService throws an exception if the database file is not found. ( Guenter Knauf )
 	- Cleanup the example files ( Guenter Knauf )
 	- Add new example infoExample.cs ( Guenter Knauf )
+	- Lock init_region_names to make the initialization phase thread-safe ( Jeremy Walther )
 1.18	Feb 20th, 2013
 	- Add South Sudan ( Boris Zentner )
 	- Update FIPS codes ( Boris Zentner )
