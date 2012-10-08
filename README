@@ -20,10 +20,16 @@ mono /usr/local/bin/mcs.exe countryV6Example.cs Country.cs DatabaseInfo.cs Locat
 For cityV6 example
 mono /usr/local/bin/mcs.exe cityV6Example.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
 
-for region example
+For region example
 mono /usr/local/bin/mcs.exe regionExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
 
-to run the examples
+For org example
+mono /usr/local/bin/mcs.exe orgExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+
+For domain example
+mono /usr/local/bin/mcs.exe domainExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+
+To run the examples:
 
 for country example
 mono countryExample.exe
@@ -33,6 +39,9 @@ mono cityExample.exe 24.24.24.24
 
 for org example
 mono orgExample.exe
+
+for domain example
+mono domainExample.exe
 
 for asn example
 mono asnExample.exe
