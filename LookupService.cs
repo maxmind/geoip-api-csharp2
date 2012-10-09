@@ -340,9 +340,10 @@ public class LookupService{
                         hasStructureInfo = true;
                         break;
                     }
+                    file.Seek(-4,SeekOrigin.Current);
                 }
                 if (hasStructureInfo) {
-                    file.Seek(-3,SeekOrigin.Current);
+                    file.Seek(-6,SeekOrigin.Current);
 		}
                 else {
                     // No structure info, must be pre Sep 2002 database, go back to end.
