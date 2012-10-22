@@ -3,8 +3,10 @@ using System;
 using System.IO;
 class Appa0{
   public static void Main(String[] args){
+    const string GeoipDbPath = "/usr/local/share/GeoIP/";
+    const string GeoipDb = GeoipDbPath + "GeoIPRegion.dat";
     //open the database
-    LookupService ls = new LookupService("/usr/local/share/GeoIP/GeoIPRegion.dat", LookupService.GEOIP_STANDARD);
+    LookupService ls = new LookupService(GeoipDb, LookupService.GEOIP_STANDARD);
     //get region of the ip address
     Region c = ls.getRegion("24.24.24.24");
     Console.Write(" code: " + c.getcountryCode()+"\n");

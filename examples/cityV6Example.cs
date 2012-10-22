@@ -3,9 +3,11 @@ using System;
 using System.IO;
 class Appa0{
   public static void Main(String[] args){
+    string GeoipDbPath = "/usr/local/share/GeoIP/";
+    string GeoipDb = GeoipDbPath + "GeoIPCity.dat";
     //open the database
     try {
-      LookupService ls = new LookupService("/usr/local/share/GeoIP/GeoLiteCityV6.dat", LookupService.GEOIP_STANDARD);
+      LookupService ls = new LookupService(GeoipDb, LookupService.GEOIP_STANDARD);
       //get city location of the ip address
       if (args.Length > 0) {
         Location l = ls.getLocationV6(args[0]);

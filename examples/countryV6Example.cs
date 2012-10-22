@@ -8,8 +8,10 @@ using System;
 using System.IO;
 class Appa0{
   public static void Main(String[] args){
+    string GeoipDbPath = "/usr/local/share/GeoIP/";
+    string GeoipDb = GeoipDbPath + "GeoIP.dat";
     //open the database
-    LookupService ls = new LookupService("/usr/local/share/GeoIP/GeoIPv6.dat", LookupService.GEOIP_MEMORY_CACHE);
+    LookupService ls = new LookupService(GeoipDb, LookupService.GEOIP_MEMORY_CACHE);
     //get country of the ip address
     Country c = ls.getCountryV6("2001:4860:0:1001::68");  
     Console.Write(" code: " + c.getCode()+"\n");    

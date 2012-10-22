@@ -2,7 +2,10 @@ using System;
 using System.IO;
 class Appa0{
   public static void Main(String[] args){
-    LookupService ls = new LookupService("/usr/local/share/GeoIP/GeoIPNetSpeed.dat", LookupService.GEOIP_STANDARD);
+    string GeoipDbPath = "/usr/local/share/GeoIP/";
+    string GeoipDb = GeoipDbPath + "GeoIPNetSpeed.dat";
+    //open the database
+    LookupService ls = new LookupService(GeoipDb, LookupService.GEOIP_STANDARD);
     int id = ls.getID(args[0]);
     int speed = id;
     if (speed == LookupService.GEOIP_UNKNOWN_SPEED){

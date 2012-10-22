@@ -118,15 +118,11 @@ public class LookupService{
   "Saint Barthelemy","Saint Martin", "Bonaire, Saint Eustatius and Saba", "South Sudan", "Other"};
 
     public LookupService(String databaseFile, int options){
-        try {
-           lock ( ioLock ) {
-             this.file = new FileStream(databaseFile, FileMode.Open, FileAccess.Read);
-           }
-           dboptions = options;
-           init();
-        } catch(System.SystemException) {
-           Console.Write("cannot open file " + databaseFile + "\n");
+        lock ( ioLock ) {
+            this.file = new FileStream(databaseFile, FileMode.Open, FileAccess.Read);
         }
+        dboptions = options;
+        init();
     }
 
     public LookupService(String databaseFile):this(databaseFile, GEOIP_STANDARD){
