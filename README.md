@@ -28,6 +28,9 @@ gmcs examples/orgExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService
 Domain:
 gmcs examples/domainExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
 
+Netspeed cell:
+gmcs examples/netspeedCellExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+
 To run the examples:
 
 Country:
