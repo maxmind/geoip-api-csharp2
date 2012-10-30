@@ -27,6 +27,7 @@ using System.Runtime.CompilerServices;
 public class LookupService{
     private FileStream file = null;
     private DatabaseInfo databaseInfo = null;
+    private Object ioLock = new Object();
     byte databaseType = Convert.ToByte(DatabaseInfo.COUNTRY_EDITION);
     int[] databaseSegments;
     int recordLength;
@@ -118,7 +119,9 @@ public class LookupService{
 
     public LookupService(String databaseFile, int options){
         try {
-	   this.file = new FileStream(databaseFile, FileMode.Open, FileAccess.Read);
+           lock ( ioLock ) {
+             this.file = new FileStream(databaseFile, FileMode.Open, FileAccess.Read);
+           }
 	   dboptions = options;
            init();
         } catch(System.SystemException) {
@@ -136,8 +139,9 @@ public class LookupService{
        databaseType = (byte)DatabaseInfo.COUNTRY_EDITION;
        recordLength = STANDARD_RECORD_LENGTH;
        //file.Seek(file.Length() - 3,SeekOrigin.Begin);
-       file.Seek(-3,SeekOrigin.End);
-        for (i = 0; i < STRUCTURE_INFO_MAX_SIZE; i++) {
+       lock ( ioLock ) {
+         file.Seek(-3,SeekOrigin.End);
+         for (i = 0; i < STRUCTURE_INFO_MAX_SIZE; i++) {
             file.Read(delim,0,3);
             if (delim[0] == 255 && delim[1] == 255 && delim[2] == 255){
                 databaseType = Convert.ToByte(file.ReadByte());
@@ -211,10 +215,11 @@ public class LookupService{
             file.Seek(0,SeekOrigin.Begin);
             file.Read(dbbuffer,0,l);
         }
+      }
     }
     public void close(){
             try {
-            file.Close();
+            lock ( ioLock ) { file.Close(); }
             file = null;
         }
         catch (Exception) { }
@@ -329,7 +334,7 @@ public class LookupService{
         }
         try {
             // Synchronize since we're accessing the database file.
-            lock (this) {
+            lock ( ioLock ) {
                 bool hasStructureInfo = false;
                 byte [] delim = new byte[3];
                 // Advance to part of file where database info is stored.
@@ -483,8 +488,10 @@ public class LookupService{
             if ((dboptions & GEOIP_MEMORY_CACHE) == 1){
               Array.Copy(dbbuffer, record_pointer, record_buf, 0, Math.Min(dbbuffer.Length - record_pointer, FULL_RECORD_LENGTH));
 	    } else {
-	    file.Seek(record_pointer,SeekOrigin.Begin);
-            file.Read(record_buf,0,FULL_RECORD_LENGTH);
+	      lock (ioLock ){
+	        file.Seek(record_pointer,SeekOrigin.Begin);
+                file.Read(record_buf,0,FULL_RECORD_LENGTH);
+	      }
 	    }
 	    for (int a0 = 0;a0 < FULL_RECORD_LENGTH;a0++){
                 record_buf2[a0] = Convert.ToChar(record_buf[a0]);
@@ -574,8 +581,10 @@ public class LookupService{
             if ((dboptions & GEOIP_MEMORY_CACHE) == 1){
               Array.Copy(dbbuffer, record_pointer, record_buf, 0, Math.Min(dbbuffer.Length - record_pointer, FULL_RECORD_LENGTH));
 	    } else {
-	    file.Seek(record_pointer,SeekOrigin.Begin);
-            file.Read(record_buf,0,FULL_RECORD_LENGTH);
+	      lock ( ioLock ){
+	        file.Seek(record_pointer,SeekOrigin.Begin);
+                file.Read(record_buf,0,FULL_RECORD_LENGTH);
+	      }
 	    }
 	    for (int a0 = 0;a0 < FULL_RECORD_LENGTH;a0++){
                 record_buf2[a0] = Convert.ToChar(record_buf[a0]);
@@ -693,8 +702,10 @@ public class LookupService{
             if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
               Array.Copy(dbbuffer, record_pointer, buf, 0, Math.Min(dbbuffer.Length - record_pointer, MAX_ORG_RECORD_LENGTH));
 	    } else {
-	      file.Seek(record_pointer,SeekOrigin.Begin);
-              file.Read(buf,0,MAX_ORG_RECORD_LENGTH);
+	      lock ( ioLock ) {
+		file.Seek(record_pointer,SeekOrigin.Begin);
+                file.Read(buf,0,MAX_ORG_RECORD_LENGTH);
+	      }
             }
 	    while (buf[str_length] != 0) {
             buf2[str_length] = Convert.ToChar(buf[str_length]);
@@ -729,8 +740,10 @@ public class LookupService{
             if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
               Array.Copy(dbbuffer, record_pointer, buf, 0, Math.Min(dbbuffer.Length - record_pointer, MAX_ORG_RECORD_LENGTH));
 	    } else {
-	      file.Seek(record_pointer,SeekOrigin.Begin);
-              file.Read(buf,0,MAX_ORG_RECORD_LENGTH);
+	      lock ( ioLock ) {
+		file.Seek(record_pointer,SeekOrigin.Begin);
+                file.Read(buf,0,MAX_ORG_RECORD_LENGTH);
+	      }
             }
 	    while (buf[str_length] != 0) {
             buf2[str_length] = Convert.ToChar(buf[str_length]);
@@ -759,8 +772,10 @@ public class LookupService{
 			buf[i] = dbbuffer[i+(2 * recordLength * offset)];
 		    }
 		} else {
-		    file.Seek(2 * recordLength * offset,SeekOrigin.Begin);
-		    file.Read(buf,0,2 * MAX_RECORD_LENGTH);
+		    lock ( ioLock ) {
+  		      file.Seek(2 * recordLength * offset,SeekOrigin.Begin);
+		      file.Read(buf,0,2 * MAX_RECORD_LENGTH);
+		    }
 		}
 	    }
             catch (IOException) {
@@ -813,8 +828,10 @@ public class LookupService{
 			buf[i] = dbbuffer[i+(2 * recordLength * offset)];
 		    }
 		} else {
-		    file.Seek(2 * recordLength * offset,SeekOrigin.Begin);
-		    file.Read(buf,0,2 * MAX_RECORD_LENGTH);
+		    lock ( ioLock ){
+		      file.Seek(2 * recordLength * offset,SeekOrigin.Begin);
+		      file.Read(buf,0,2 * MAX_RECORD_LENGTH);
+		    }
 		}
 	    }
             catch (IOException) {
