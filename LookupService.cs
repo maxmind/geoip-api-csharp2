@@ -257,16 +257,16 @@ public class LookupService{
             //throw new IllegalStateException("Database has been closed.");
             throw new Exception("Database has been closed.");
         }
-        if ((databaseType == DatabaseInfo.CITY_EDITION_REV1) | 
+        if ((databaseType == DatabaseInfo.CITY_EDITION_REV1) |
         (databaseType == DatabaseInfo.CITY_EDITION_REV0)) {
             Location l = getLocation(ipAddress);
             if (l == null) {
                 return UNKNOWN_COUNTRY;
-            } 
+            }
             else {
                 return new Country(l.countryCode, l.countryName);
             }
-        } 
+        }
         else {
             int ret = SeekCountryV6(ipAddress) - COUNTRY_BEGIN;
             if (ret == 0) {
@@ -283,16 +283,16 @@ public class LookupService{
             //throw new IllegalStateException("Database has been closed.");
             throw new Exception("Database has been closed.");
         }
-        if ((databaseType == DatabaseInfo.CITY_EDITION_REV1) | 
+        if ((databaseType == DatabaseInfo.CITY_EDITION_REV1) |
         (databaseType == DatabaseInfo.CITY_EDITION_REV0)) {
             Location l = getLocation(ipAddress);
             if (l == null) {
                 return UNKNOWN_COUNTRY;
-            } 
+            }
             else {
                 return new Country(l.countryCode, l.countryName);
             }
-        } 
+        }
         else {
             int ret = SeekCountry(ipAddress) - COUNTRY_BEGIN;
             if (ret == 0) {
@@ -317,7 +317,7 @@ public class LookupService{
     }
 
     public int getID(IPAddress ipAddress) {
-        
+
         return getID(bytestoLong(ipAddress.GetAddressBytes()));
     }
 
@@ -333,44 +333,71 @@ public class LookupService{
             return databaseInfo;
         }
         try {
-            // Synchronize since we're accessing the database file.
-            lock ( ioLock ) {
-                bool hasStructureInfo = false;
-                byte [] delim = new byte[3];
-                // Advance to part of file where database info is stored.
-                file.Seek(-3,SeekOrigin.End);
-		for (int i=0; i<STRUCTURE_INFO_MAX_SIZE; i++) {
-                    file.Read(delim,0,3);
-                    if (delim[0] == 255 && delim[1] == 255 && delim[2] == 255) {
-                        hasStructureInfo = true;
-                        break;
-                    }
-                    file.Seek(-4,SeekOrigin.Current);
-                }
-                if (hasStructureInfo) {
-                    file.Seek(-6,SeekOrigin.Current);
+	  if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
+	    int indexStart = -1;
+	    int indexEnd = dbbuffer.Length;
+	    for (int i = dbbuffer.Length - STRUCTURE_INFO_MAX_SIZE - 1; i < dbbuffer.Length; i++) {
+	      if (dbbuffer[i + 0] == 255 && dbbuffer[i + 1] == 255 && dbbuffer[i + 2] == 255) {
+		indexEnd = i;
+		break;
+	      }
+	    }
+	    for (int i = dbbuffer.Length - 1; i > dbbuffer.Length - DATABASE_INFO_MAX_SIZE; i--) {
+	      if (dbbuffer[i - 0] == 0 && dbbuffer[i - 1] == 0 && dbbuffer[i - 2] == 0) {
+		indexStart = i + 1;
+		break;
+	      }
+	    }
+	    if (indexStart == -1)
+	      throw new IOException("databaseInfo: buffer is corrupted.");
+	    char[] dbInfo = new char[indexEnd - indexStart];
+	    for (int a0 = indexStart, i = 0; a0 < indexEnd; a0++, i++) {
+	      dbInfo[i] = Convert.ToChar(dbbuffer[a0]);
+	    }
+	    // Create the database info object using the string.
+	    this.databaseInfo = new DatabaseInfo(new String(dbInfo));
+	    return databaseInfo;
+	  }
+	  else {
+	    // Synchronize since we're accessing the database file.
+	    lock ( ioLock ) {
+	      bool hasStructureInfo = false;
+	      byte [] delim = new byte[3];
+	      // Advance to part of file where database info is stored.
+	      file.Seek(-3,SeekOrigin.End);
+	      for (int i=0; i<STRUCTURE_INFO_MAX_SIZE; i++) {
+		file.Read(delim,0,3);
+		if (delim[0] == 255 && delim[1] == 255 && delim[2] == 255) {
+		  hasStructureInfo = true;
+		  break;
 		}
-                else {
-                    // No structure info, must be pre Sep 2002 database, go back to end.
-                    file.Seek(-3,SeekOrigin.End);
-                }
-                // Find the database info string.
-                for (int i=0; i<DATABASE_INFO_MAX_SIZE; i++) {
-                    file.Read(delim,0,3);
-                    if (delim[0]==0 && delim[1]==0 && delim[2]==0) {
-                        byte[] dbInfo = new byte[i];
-                        char[] dbInfo2 = new char[i];
-                        file.Read(dbInfo,0,i);
-                        for (int a0 = 0;a0 < i;a0++){
-			    dbInfo2[a0] = Convert.ToChar(dbInfo[a0]);
-			}
-			// Create the database info object using the string.
-                        this.databaseInfo = new DatabaseInfo(new String(dbInfo2));
-                        return databaseInfo;
-                   }
-                    file.Seek(-4,SeekOrigin.Current);
+		file.Seek(-4,SeekOrigin.Current);
+	      }
+	      if (hasStructureInfo) {
+		file.Seek(-6,SeekOrigin.Current);
+	      }
+	      else {
+		// No structure info, must be pre Sep 2002 database, go back to end.
+		file.Seek(-3,SeekOrigin.End);
+	      }
+	      // Find the database info string.
+	      for (int i=0; i<DATABASE_INFO_MAX_SIZE; i++) {
+		file.Read(delim,0,3);
+		if (delim[0]==0 && delim[1]==0 && delim[2]==0) {
+		  byte[] dbInfo = new byte[i];
+		  char[] dbInfo2 = new char[i];
+		  file.Read(dbInfo,0,i);
+		  for (int a0 = 0;a0 < i;a0++){
+		    dbInfo2[a0] = Convert.ToChar(dbInfo[a0]);
+		  }
+		  // Create the database info object using the string.
+		  this.databaseInfo = new DatabaseInfo(new String(dbInfo2));
+		  return databaseInfo;
 		}
-            }
+		file.Seek(-4,SeekOrigin.Current);
+	      }
+	    }
+	  }
         }
         catch (Exception e) {
             Console.Write(e.Message);
@@ -761,7 +788,7 @@ public class LookupService{
 
     [MethodImpl(MethodImplOptions.Synchronized)]
     private int SeekCountryV6(IPAddress ipAddress){
-            byte [] v6vec = ipAddress.GetAddressBytes();      
+            byte [] v6vec = ipAddress.GetAddressBytes();
             byte [] buf = new byte[2 * MAX_RECORD_LENGTH];
             int [] x = new int[2];
         int offset = 0;
