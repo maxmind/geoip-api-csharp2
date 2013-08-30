@@ -7,15 +7,15 @@ public static class RegionName
 {
 
     private static Hashtable GEOIP_REGION_NAME;
-	
+
     public static String getRegionName(String ccode, String region ) {
         if ( GEOIP_REGION_NAME == null ) {
             init_region_names();
         }
 
-        if ( region == null || region == "00" ){ 
+        if ( region == null || region == "00" ){
             return null;
-		}
+        }
 
         if ( !GEOIP_REGION_NAME.ContainsKey( ccode ) ) {
             return null;

@@ -1,5 +1,5 @@
 /**
- * DatabaseInfo.java
+ * DatabaseInfo.cs
  *
  * Copyright (C) 2008 MaxMind Inc.  All Rights Reserved.
  *
@@ -44,7 +44,7 @@ public class DatabaseInfo {
     public static int CITY_EDITION_REV0_V6     = 31;
     public static int NETSPEED_EDITION_REV1    = 32;
     public static int NETSPEED_EDITION_REV1_V6 = 33;
-    
+
 
     //private static SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
@@ -94,8 +94,8 @@ public class DatabaseInfo {
                     //}
                 }
                 catch (Exception e) {
-		  Console.Write(e.Message);
-		}
+                    Console.Write(e.Message);
+                }
                 break;
             }
         }
