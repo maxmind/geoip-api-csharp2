@@ -1,4 +1,5 @@
 1.19	???
+        - Update RegionNames 20130903 ( Boris Zentner )
 	- Add NetSpeedCell example ( Boris Zentner )
 	- LookupService throws an exception if the database file is not found. ( Guenter Knauf )
 	- Cleanup the example files ( Guenter Knauf )

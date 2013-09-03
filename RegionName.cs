@@ -5,7 +5,7 @@ using System.Collections;
 
 public static class RegionName
 {
-	private static Object __lock = new Object(); // Object used to synchronize threads
+        private static Object __lock = new Object(); // Object used to synchronize threads
 
     private static Hashtable GEOIP_REGION_NAME;
 
@@ -270,6 +270,7 @@ public static class RegionName
             Hashtable cc_reg_BA = new Hashtable();
             cc_reg_BA.Add( "01", "Federation of Bosnia and Herzegovina" );
             cc_reg_BA.Add( "02", "Republika Srpska" );
+            cc_reg_BA.Add( "03", "Brcko District"  );
             GEOIP_REGION_NAME.Add( "BA", cc_reg_BA );
             Hashtable cc_reg_BB = new Hashtable();
             cc_reg_BB.Add( "01", "Christ Church" );
@@ -3154,7 +3155,9 @@ public static class RegionName
             cc_reg_PH.Add( "I6", "Compostela Valley" );
             cc_reg_PH.Add( "I7", "Davao del Norte" );
             cc_reg_PH.Add( "J7", "Kalinga" );
+            cc_reg_PH.Add( "J4", "Himamaylan"  );
             cc_reg_PH.Add( "K6", "Malaybalay" );
+            cc_reg_PH.Add( "L9", "Passi"  );
             cc_reg_PH.Add( "M5", "San Jose del Monte" );
             cc_reg_PH.Add( "M6", "San Juan" );
             cc_reg_PH.Add( "M8", "Santiago" );
@@ -3335,7 +3338,6 @@ public static class RegionName
             cc_reg_RU.Add( "32", "Khanty-Mansiy" );
             cc_reg_RU.Add( "33", "Kirov" );
             cc_reg_RU.Add( "34", "Komi" );
-            cc_reg_RU.Add( "35", "Komi-Permyak" );
             cc_reg_RU.Add( "36", "Koryak" );
             cc_reg_RU.Add( "37", "Kostroma" );
             cc_reg_RU.Add( "38", "Krasnodar" );
@@ -3382,7 +3384,6 @@ public static class RegionName
             cc_reg_RU.Add( "79", "Tuva" );
             cc_reg_RU.Add( "80", "Udmurt" );
             cc_reg_RU.Add( "81", "Ul'yanovsk" );
-            cc_reg_RU.Add( "82", "Ust-Orda Buryat" );
             cc_reg_RU.Add( "83", "Vladimir" );
             cc_reg_RU.Add( "84", "Volgograd" );
             cc_reg_RU.Add( "85", "Vologda" );
@@ -3469,6 +3470,8 @@ public static class RegionName
             cc_reg_SD.Add( "35", "Upper Nile" );
             cc_reg_SD.Add( "40", "Al Wahadah State" );
             cc_reg_SD.Add( "44", "Central Equatoria State" );
+            cc_reg_SD.Add( "49", "Southern Darfur"  );
+            cc_reg_SD.Add( "50", "Southern Kordofan"  );
             GEOIP_REGION_NAME.Add( "SD", cc_reg_SD );
             Hashtable cc_reg_SE = new Hashtable();
             cc_reg_SE.Add( "02", "Blekinge Lan" );
@@ -3927,12 +3930,16 @@ public static class RegionName
             cc_reg_TH.Add( "78", "Mukdahan" );
             cc_reg_TH.Add( "79", "Nong Bua Lamphu" );
             cc_reg_TH.Add( "80", "Sa Kaeo" );
+            cc_reg_TH.Add( "81", "Bueng Kan"  );
             GEOIP_REGION_NAME.Add( "TH", cc_reg_TH );
             Hashtable cc_reg_TJ = new Hashtable();
             cc_reg_TJ.Add( "01", "Kuhistoni Badakhshon" );
             cc_reg_TJ.Add( "02", "Khatlon" );
             cc_reg_TJ.Add( "03", "Sughd" );
             GEOIP_REGION_NAME.Add( "TJ", cc_reg_TJ );
+            Hashtable cc_reg_TL = new Hashtable();
+            cc_reg_TL.Add( "06", "Dili"  );
+            GEOIP_REGION_NAME.Add( "TL", cc_reg_TL  );
             Hashtable cc_reg_TM = new Hashtable();
             cc_reg_TM.Add( "01", "Ahal" );
             cc_reg_TM.Add( "02", "Balkan" );
