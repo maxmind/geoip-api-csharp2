@@ -134,7 +134,7 @@ public class LookupService{
        byte [] buf = new byte[SEGMENT_RECORD_LENGTH];
        databaseType = (byte)DatabaseInfo.COUNTRY_EDITION;
        recordLength = STANDARD_RECORD_LENGTH;
-       //file.Seek(file.Length() - 3,SeekOrigin.Begin);
+       databaseInfo = getDatabaseInfo();
        lock ( ioLock ) {
          file.Seek(-3,SeekOrigin.End);
          for (i = 0; i < STRUCTURE_INFO_MAX_SIZE; i++) {
