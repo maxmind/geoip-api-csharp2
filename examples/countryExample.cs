@@ -13,8 +13,8 @@ class Appa0{
     //open the database
     LookupService ls = new LookupService(GeoipDb, LookupService.GEOIP_MEMORY_CACHE);
     //get country of the ip address
-    Country c = ls.getCountry("24.24.24.24");  
-    Console.Write(" code: " + c.getCode()+"\n");    
-    Console.Write(" name: " + c.getName()+"\n");    
+    Country c = ls.getCountry("24.24.24.24");
+    Console.Write(" code: " + c.getCode()+"\n");
+    Console.Write(" name: " + c.getName()+"\n");
   }
 }
