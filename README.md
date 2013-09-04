@@ -8,28 +8,28 @@ Should also work in Windows C# environment.
 To compile the examples:
 
 Country:
-gmcs examples/countryExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+gmcs examples/countryExample.cs src/*.cs
 
 City:
-gmcs examples/cityExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+gmcs examples/cityExample.cs src/*.cs
 
 Country v6:
-gmcs examples/countryV6Example.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+gmcs examples/countryV6Example.cs src/*.cs
 
 City v6:
-gmcs examples/cityV6Example.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+gmcs examples/cityV6Example.cs src/*.cs
 
 Region:
-gmcs examples/regionExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+gmcs examples/regionExample.cs src/*.cs
 
 Organization:
-gmcs examples/orgExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+gmcs examples/orgExample.cs src/*.cs
 
 Domain:
-gmcs examples/domainExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+gmcs examples/domainExample.cs src/*.cs
 
 Netspeed cell:
-gmcs examples/netspeedCellExample.cs Country.cs DatabaseInfo.cs Location.cs LookupService.cs Region.cs RegionName.cs
+gmcs examples/netspeedCellExample.cs src/*.cs
 
 To run the examples:
 
