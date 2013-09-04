@@ -5,7 +5,8 @@ using System.Collections;
 
 public static class RegionName
 {
-        private static Object __lock = new Object(); // Object used to synchronize threads
+    // Object used to synchronize threads
+    private static Object __lock = new Object();
 
     private static Hashtable GEOIP_REGION_NAME;
 
