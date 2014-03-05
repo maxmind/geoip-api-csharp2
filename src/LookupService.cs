@@ -820,7 +820,7 @@ public class LookupService{
         for (int depth = 31; depth >= 0; depth--) {
             try {
                 if ((dboptions & GEOIP_MEMORY_CACHE) == 1) {
-                    for (int i = 0;i < (2 * MAX_RECORD_LENGTH);i++) {
+                    for (int i = 0;i < (2 * recordLength);i++) {
                         buf[i] = dbbuffer[i+(2 * recordLength * offset)];
                     }
                 } else {
