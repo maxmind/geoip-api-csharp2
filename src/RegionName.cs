@@ -1,4 +1,4 @@
-/* Copyright 2013 Maxmind LLC All Rights Reserved */
+/* Copyright 2014 Maxmind LLC All Rights Reserved */
 
 using System;
 using System.Collections;
@@ -38,7 +38,6 @@ public static class RegionName
 
             GEOIP_REGION_NAME = new Hashtable();
             Hashtable cc_reg_AD = new Hashtable();
-            cc_reg_AD.Add( "02", "Canillo" );
             cc_reg_AD.Add( "03", "Encamp" );
             cc_reg_AD.Add( "04", "La Massana" );
             cc_reg_AD.Add( "05", "Ordino" );
@@ -271,7 +270,7 @@ public static class RegionName
             Hashtable cc_reg_BA = new Hashtable();
             cc_reg_BA.Add( "01", "Federation of Bosnia and Herzegovina" );
             cc_reg_BA.Add( "02", "Republika Srpska" );
-            cc_reg_BA.Add( "03", "Brcko District"  );
+            cc_reg_BA.Add( "03", "Brcko District" );
             GEOIP_REGION_NAME.Add( "BA", cc_reg_BA );
             Hashtable cc_reg_BB = new Hashtable();
             cc_reg_BB.Add( "01", "Christ Church" );
@@ -293,6 +292,7 @@ public static class RegionName
             cc_reg_BD.Add( "84", "Chittagong" );
             cc_reg_BD.Add( "85", "Barisal" );
             cc_reg_BD.Add( "86", "Sylhet" );
+            cc_reg_BD.Add( "87", "Rangpur" );
             GEOIP_REGION_NAME.Add( "BD", cc_reg_BD );
             Hashtable cc_reg_BE = new Hashtable();
             cc_reg_BE.Add( "01", "Antwerpen" );
@@ -1055,6 +1055,7 @@ public static class RegionName
             cc_reg_EG.Add( "24", "Suhaj" );
             cc_reg_EG.Add( "26", "Janub Sina'" );
             cc_reg_EG.Add( "27", "Shamal Sina'" );
+            cc_reg_EG.Add( "28", "Al Uqsur" );
             GEOIP_REGION_NAME.Add( "EG", cc_reg_EG );
             Hashtable cc_reg_ER = new Hashtable();
             cc_reg_ER.Add( "01", "Anseba" );
@@ -2074,7 +2075,9 @@ public static class RegionName
             cc_reg_KH.Add( "17", "Stung Treng" );
             cc_reg_KH.Add( "18", "Svay Rieng" );
             cc_reg_KH.Add( "19", "Takeo" );
+            cc_reg_KH.Add( "22", "Phnum Penh" );
             cc_reg_KH.Add( "25", "Banteay Meanchey" );
+            cc_reg_KH.Add( "28", "Preah Seihanu" );
             cc_reg_KH.Add( "29", "Batdambang" );
             cc_reg_KH.Add( "30", "Pailin" );
             GEOIP_REGION_NAME.Add( "KH", cc_reg_KH );
@@ -2544,6 +2547,23 @@ public static class RegionName
             cc_reg_MK.Add( "C4", "Zitose" );
             cc_reg_MK.Add( "C5", "Zletovo" );
             cc_reg_MK.Add( "C6", "Zrnovci" );
+            cc_reg_MK.Add( "C8", "Cair" );
+            cc_reg_MK.Add( "C9", "Caska" );
+            cc_reg_MK.Add( "D2", "Debar" );
+            cc_reg_MK.Add( "D3", "Demir Hisar" );
+            cc_reg_MK.Add( "D4", "Gostivar" );
+            cc_reg_MK.Add( "D6", "Kavadarci" );
+            cc_reg_MK.Add( "D7", "Kumanovo" );
+            cc_reg_MK.Add( "D8", "Makedonski Brod" );
+            cc_reg_MK.Add( "E2", "Ohrid" );
+            cc_reg_MK.Add( "E3", "Prilep" );
+            cc_reg_MK.Add( "E5", "Dojran" );
+            cc_reg_MK.Add( "E6", "Struga" );
+            cc_reg_MK.Add( "E7", "Strumica" );
+            cc_reg_MK.Add( "E8", "Tetovo" );
+            cc_reg_MK.Add( "E9", "Valandovo" );
+            cc_reg_MK.Add( "F1", "Veles" );
+            cc_reg_MK.Add( "F2", "Aerodrom" );
             GEOIP_REGION_NAME.Add( "MK", cc_reg_MK );
             Hashtable cc_reg_ML = new Hashtable();
             cc_reg_ML.Add( "01", "Bamako" );
@@ -3153,12 +3173,19 @@ public static class RegionName
             cc_reg_PH.Add( "G8", "Aurora" );
             cc_reg_PH.Add( "H2", "Quezon" );
             cc_reg_PH.Add( "H3", "Negros Occidental" );
+            cc_reg_PH.Add( "H9", "Biliran" );
             cc_reg_PH.Add( "I6", "Compostela Valley" );
             cc_reg_PH.Add( "I7", "Davao del Norte" );
+            cc_reg_PH.Add( "J3", "Guimaras" );
+            cc_reg_PH.Add( "J4", "Himamaylan" );
             cc_reg_PH.Add( "J7", "Kalinga" );
-            cc_reg_PH.Add( "J4", "Himamaylan"  );
+            cc_reg_PH.Add( "K1", "Las Pinas" );
+            cc_reg_PH.Add( "K5", "Malabon" );
             cc_reg_PH.Add( "K6", "Malaybalay" );
-            cc_reg_PH.Add( "L9", "Passi"  );
+            cc_reg_PH.Add( "L4", "Muntinlupa" );
+            cc_reg_PH.Add( "L5", "Navotas" );
+            cc_reg_PH.Add( "L7", "Paranaque" );
+            cc_reg_PH.Add( "L9", "Passi" );
             cc_reg_PH.Add( "M5", "San Jose del Monte" );
             cc_reg_PH.Add( "M6", "San Juan" );
             cc_reg_PH.Add( "M8", "Santiago" );
@@ -3225,7 +3252,6 @@ public static class RegionName
             Hashtable cc_reg_PY = new Hashtable();
             cc_reg_PY.Add( "01", "Alto Parana" );
             cc_reg_PY.Add( "02", "Amambay" );
-            cc_reg_PY.Add( "03", "Boqueron" );
             cc_reg_PY.Add( "04", "Caaguazu" );
             cc_reg_PY.Add( "05", "Caazapa" );
             cc_reg_PY.Add( "06", "Central" );
@@ -3239,9 +3265,9 @@ public static class RegionName
             cc_reg_PY.Add( "16", "Presidente Hayes" );
             cc_reg_PY.Add( "17", "San Pedro" );
             cc_reg_PY.Add( "19", "Canindeyu" );
-            cc_reg_PY.Add( "20", "Chaco" );
-            cc_reg_PY.Add( "21", "Nueva Asuncion" );
+            cc_reg_PY.Add( "22", "Asuncion" );
             cc_reg_PY.Add( "23", "Alto Paraguay" );
+            cc_reg_PY.Add( "24", "Boqueron" );
             GEOIP_REGION_NAME.Add( "PY", cc_reg_PY );
             Hashtable cc_reg_QA = new Hashtable();
             cc_reg_QA.Add( "01", "Ad Dawhah" );
@@ -3471,8 +3497,11 @@ public static class RegionName
             cc_reg_SD.Add( "35", "Upper Nile" );
             cc_reg_SD.Add( "40", "Al Wahadah State" );
             cc_reg_SD.Add( "44", "Central Equatoria State" );
-            cc_reg_SD.Add( "49", "Southern Darfur"  );
-            cc_reg_SD.Add( "50", "Southern Kordofan"  );
+            cc_reg_SD.Add( "49", "Southern Darfur" );
+            cc_reg_SD.Add( "50", "Southern Kordofan" );
+            cc_reg_SD.Add( "52", "Kassala" );
+            cc_reg_SD.Add( "53", "River Nile" );
+            cc_reg_SD.Add( "55", "Northern Darfur" );
             GEOIP_REGION_NAME.Add( "SD", cc_reg_SD );
             Hashtable cc_reg_SE = new Hashtable();
             cc_reg_SE.Add( "02", "Blekinge Lan" );
@@ -3698,6 +3727,20 @@ public static class RegionName
             cc_reg_SI.Add( "N8", "Zuzemberk Commune" );
             cc_reg_SI.Add( "N9", "Apace Commune" );
             cc_reg_SI.Add( "O1", "Cirkulane Commune" );
+            cc_reg_SI.Add( "O2", "Gorje" );
+            cc_reg_SI.Add( "O3", "Kostanjevica na Krki" );
+            cc_reg_SI.Add( "O4", "Log-Dragomer" );
+            cc_reg_SI.Add( "O5", "Makole" );
+            cc_reg_SI.Add( "O6", "Mirna" );
+            cc_reg_SI.Add( "O7", "Mokronog-Trebelno" );
+            cc_reg_SI.Add( "O8", "Poljcane" );
+            cc_reg_SI.Add( "O9", "Recica ob Savinji" );
+            cc_reg_SI.Add( "P1", "Rence-Vogrsko" );
+            cc_reg_SI.Add( "P2", "Sentrupert" );
+            cc_reg_SI.Add( "P3", "Smarjesk Toplice" );
+            cc_reg_SI.Add( "P4", "Sredisce ob Dravi" );
+            cc_reg_SI.Add( "P5", "Straza" );
+            cc_reg_SI.Add( "P7", "Sveti Jurij v Slovenskih Goricah" );
             GEOIP_REGION_NAME.Add( "SI", cc_reg_SI );
             Hashtable cc_reg_SK = new Hashtable();
             cc_reg_SK.Add( "01", "Banska Bystrica" );
@@ -3931,16 +3974,18 @@ public static class RegionName
             cc_reg_TH.Add( "78", "Mukdahan" );
             cc_reg_TH.Add( "79", "Nong Bua Lamphu" );
             cc_reg_TH.Add( "80", "Sa Kaeo" );
-            cc_reg_TH.Add( "81", "Bueng Kan"  );
+            cc_reg_TH.Add( "81", "Bueng Kan" );
             GEOIP_REGION_NAME.Add( "TH", cc_reg_TH );
             Hashtable cc_reg_TJ = new Hashtable();
             cc_reg_TJ.Add( "01", "Kuhistoni Badakhshon" );
             cc_reg_TJ.Add( "02", "Khatlon" );
             cc_reg_TJ.Add( "03", "Sughd" );
+            cc_reg_TJ.Add( "04", "Dushanbe" );
+            cc_reg_TJ.Add( "05", "Nohiyahoi Tobei Jumhuri" );
             GEOIP_REGION_NAME.Add( "TJ", cc_reg_TJ );
             Hashtable cc_reg_TL = new Hashtable();
-            cc_reg_TL.Add( "06", "Dili"  );
-            GEOIP_REGION_NAME.Add( "TL", cc_reg_TL  );
+            cc_reg_TL.Add( "06", "Dili" );
+            GEOIP_REGION_NAME.Add( "TL", cc_reg_TL );
             Hashtable cc_reg_TM = new Hashtable();
             cc_reg_TM.Add( "01", "Ahal" );
             cc_reg_TM.Add( "02", "Balkan" );
@@ -4296,6 +4341,7 @@ public static class RegionName
             cc_reg_UZ.Add( "12", "Surkhondaryo" );
             cc_reg_UZ.Add( "13", "Toshkent" );
             cc_reg_UZ.Add( "14", "Toshkent" );
+            cc_reg_UZ.Add( "15", "Jizzax" );
             GEOIP_REGION_NAME.Add( "UZ", cc_reg_UZ );
             Hashtable cc_reg_VC = new Hashtable();
             cc_reg_VC.Add( "01", "Charlotte" );
