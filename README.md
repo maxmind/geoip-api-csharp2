@@ -1,9 +1,16 @@
-# GeoIP C# API 1.18
+# GeoIP Legacy .NET API #
+
+## Important Note ##
+
+This API is for the GeoIP Legacy format (dat). To read the MaxMind DB format
+(mmdb) used by GeoIP2, please see
+[our GeoIP2 .NET API](https://github.com/maxmind/GeoIP2-dotnet).
+
+## Thread Safety ##
 
 As of version 1.14 this API is thread safe.
 
-Instructions for Mono. See http://www.mono-project.com/
-Should also work in Windows C# environment.
+## Instructions for Mono ##
 
 To compile the examples:
 
@@ -57,7 +64,7 @@ mono cityV6Example.exe ::24.24.24.24
 ASN v6:
 mono asnV6Example.exe
 
-## Memory Caching
+## Memory Caching ##
 
 There are two options available:
 
