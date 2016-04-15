@@ -1,10 +1,15 @@
 # GeoIP Legacy .NET API #
 
-## Important Note ##
+## Deprecation Notice ##
 
-This API is for the GeoIP Legacy format (dat). To read the MaxMind DB format
-(mmdb) used by GeoIP2, please see
-[our GeoIP2 .NET API](https://github.com/maxmind/GeoIP2-dotnet).
+This API is deprecated and no longer supported. Please use our [our GeoIP2
+.NET API](https://github.com/maxmind/GeoIP2-dotnet) instead.
+
+## IP Geolocation Usage ##
+
+IP geolocation is inherently imprecise. Locations are often near the center of
+the population. Any location provided by a GeoIP database or web service
+should not be used to identify a particular address or household.
 
 ## Thread Safety ##
 
